@@ -14,36 +14,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.gn.module.charts;
+package com.gn.module.dialog;
 
-import javafx.collections.FXCollections;
+import com.gn.model.Transaction;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  21/10/2018
- * Version 1.0
+ * Create on  08/10/2018
+ * Version 2.0
  */
-public class PieChart implements Initializable {
+public class Dialog implements Initializable {
+
+    @FXML private Button btnCancel;
 
     @FXML
-    private javafx.scene.chart.PieChart pieChart;
+    private void closeDialog(){
+        // get a handle to the stage
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ObservableList<javafx.scene.chart.PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new javafx.scene.chart.PieChart.Data("Sun", 20),
-                new javafx.scene.chart.PieChart.Data("IBM", 12),
-                new javafx.scene.chart.PieChart.Data("HP", 25),
-                new javafx.scene.chart.PieChart.Data("Dell", 22),
-                new javafx.scene.chart.PieChart.Data("Apple", 30)
-        );
-        pieChart.setData(pieChartData);
-        pieChart.setClockwise(false);
+
     }
 }

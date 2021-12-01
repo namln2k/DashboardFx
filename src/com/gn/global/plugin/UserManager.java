@@ -31,22 +31,23 @@ import java.util.Properties;
 public class UserManager {
 
     public static User get(String name){
-        try {
-            File file = new File("user/" + name + ".properties");
-            Properties properties = new Properties();
-
-            FileInputStream inputStream = new FileInputStream(file);
-            properties.load(inputStream);
-            User user = new User();
-            user.setUserName(name);
-            user.setFullName(properties.getProperty("fullName"));
-            user.setEmail(properties.getProperty("email"));
-            user.setPassword(properties.getProperty("password"));
-            return user;
-        } catch (IOException e){
-            e.printStackTrace();
-            return null;
-        }
+//        try {
+//            File file = new File("user/" + name + ".properties");
+//            Properties properties = new Properties();
+//
+//            FileInputStream inputStream = new FileInputStream(file);
+//            properties.load(inputStream);
+//            User user = new User();
+//            user.setUserName(name);
+//            user.setFullName(properties.getProperty("fullName"));
+//            user.setEmail(properties.getProperty("email"));
+//            user.setPassword(properties.getProperty("password"));
+//            return user;
+            return new User("namln", "Le Nhat Nam", "namln2k@gmail.com");
+//        } catch (IOException e){
+//            e.printStackTrace();
+//            return null;
+//        }
     }
 
     public static void save(User user) {

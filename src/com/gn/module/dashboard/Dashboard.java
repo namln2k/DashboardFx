@@ -16,23 +16,27 @@
  */
 package com.gn.module.dashboard;
 
-import eu.hansolo.tilesfx.Tile;
-import eu.hansolo.tilesfx.chart.ChartData;
+import com.gn.model.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.AreaChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -42,38 +46,79 @@ import java.util.ResourceBundle;
  */
 public class Dashboard implements Initializable {
 
-//    @FXML private Tile calendar;
-    @FXML private AreaChart<String, Number> areaChart;
+    @FXML
+    private TableView<Transaction> table_view;
+    @FXML
+    private TableColumn<Transaction, Integer> col_stt;
+    @FXML
+    private TableColumn<Transaction, String> col_username;
+    @FXML
+    private TableColumn<Transaction, String> col_fullname;
+    @FXML
+    private TableColumn<Transaction, String> col_project;
+    @FXML
+    private TableColumn<Transaction, String> col_partner;
+    @FXML
+    private TableColumn<Transaction, Long> col_money;
+    @FXML
+    private TableColumn<Transaction, Date> col_time;
+    @FXML
+    private TableColumn<Transaction, String> col_action;
+    @FXML
+    private TableColumn<Transaction, String> col_content;
+    @FXML
+    private TableColumn<Transaction, String> col_status;
+    @FXML
+    private Button btn_delete;
 
-    @FXML private PieChart pieChart;
+    ObservableList<Transaction> table_data = FXCollections.observableArrayList();
 
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            table_data.add(new Transaction(1, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(2, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(3, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(4, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(5, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(6, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(7, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+            table_data.add(new Transaction(8, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+        } catch (ParseException e) {
+        }
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Sun", 20),
-                new PieChart.Data("IBM", 12),
-                new PieChart.Data("HP", 25),
-                new PieChart.Data("Dell", 22),
-                new PieChart.Data("Apple", 30)
-        );
-        pieChart.setData(pieChartData);
-        pieChart.setClockwise(false);
+        col_stt.setCellValueFactory(new PropertyValueFactory<>("stt"));
+        col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        col_fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
+        col_project.setCellValueFactory(new PropertyValueFactory<>("project"));
+        col_partner.setCellValueFactory(new PropertyValueFactory<>("partner"));
+        col_money.setCellValueFactory(new PropertyValueFactory<>("money"));
+        col_time.setCellValueFactory(new PropertyValueFactory<>("time"));
+        col_action.setCellValueFactory(new PropertyValueFactory<>("action"));
+        col_content.setCellValueFactory(new PropertyValueFactory<>("content"));
+        col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Legend 1");
-        series.getData().add(new XYChart.Data<>("0", 2D));
-        series.getData().add(new XYChart.Data<>("1", 8D));
-        series.getData().add(new XYChart.Data<>("2", 5D));
-        series.getData().add(new XYChart.Data<>("3", 3D));
-        series.getData().add(new XYChart.Data<>("4", 6D));
-        series.getData().add(new XYChart.Data<>("5", 8D));
-        series.getData().add(new XYChart.Data<>("6", 5D));
-        series.getData().add(new XYChart.Data<>("7", 6D));
-        series.getData().add(new XYChart.Data<>("8", 5D));
+        table_view.setItems(table_data);
+    }
 
-        areaChart.getData().setAll(series);
-        areaChart.setCreateSymbols(true);
+    @FXML
+    private void deleteRow(ActionEvent event) {
+        if (table_view.getSelectionModel().getSelectedItem() != null) {
+            System.out.println(table_view.getSelectionModel().getSelectedItem().getStt());
+        }
+    }
+
+    @FXML
+    void openDialog(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/gn/module/dialog/dialog.fxml"));
+        Parent parent = fxmlLoader.load();
+//        Dialog dialogController = fxmlLoader.<Dialog>getController();
+
+        Scene scene = new Scene(parent, 900, 600);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }

@@ -352,8 +352,8 @@ public class Main implements Initializable {
 
 
     private void loadContentPopup(){
-        try {
-            popContent = FXMLLoader.load(getClass().getResource("/com/gn/module/main/Config.fxml"));
+//        try {
+//            popContent = FXMLLoader.load(getClass().getResource("/com/gn/module/main/Config.fxml"));
             popConfig.getRoot().getStylesheets().add(getClass().getResource("/com/gn/theme/css/poplight.css").toExternalForm());
             popConfig.setContentNode(popContent);
             popConfig.setArrowLocation(PopOver.ArrowLocation.TOP_RIGHT);
@@ -364,9 +364,9 @@ public class Main implements Initializable {
             popConfig.setAnimated(false);
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @FXML

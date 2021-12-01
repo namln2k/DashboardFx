@@ -62,68 +62,68 @@ public class App extends Application {
 
         if(section.isLogged()){
             user = UserManager.get(section.getUserLogged());
-            userDetail = new UserDetail(section.getUserLogged(), user.getFullName(), "subtitle");
-        } else {
-            userDetail = new UserDetail();
+//            userDetail = new UserDetail(section.getUserLogged(), user.getFullName(), "subtitle");
         }
+//        else {
+//            userDetail = new UserDetail();
+//        }
 
         float total = 43; // the difference represents the views not loaded
         increment = 100f / total;
 
-        load("jfoenix", "jfx-text-field");
+//        load("jfoenix", "jfx-text-field");
 
-        load("designer", "cards");
-        load("designer", "banners");
-        load("designer", "carousel");
-        load("designer", "animated-button");
-        load("designer", "alerts");
-
-        load("controls", "button");
-        load("controls", "toggle");
-        load("controls", "textfield");
-        load("controls", "text-area");
-        load("controls", "datepicker");
-        load("controls", "checkbox");
-        load("controls", "radiobutton");
-        load("controls", "combobox");
-        load("controls", "choicebox");
-        load("controls", "splitmenubutton");
-        load("controls", "menubutton");
-        load("controls", "menubar");
-        load("controls", "colorpicker");
-        load("controls", "slider");
-        load("controls", "spinner");
-        load("controls", "progressbar");
-        load("controls", "progressindicator");
-        load("controls", "pagination");
-        load("controls", "mediaview");
-        load("controls", "listview");
-        load("controls", "label");
-        load("controls", "hyperlink");
-        load("controls", "imageview");
-        load("controls", "tableview");
-        load("controls", "scrollbar");
-        load("controls", "passwordfield");
-        load("controls", "treeview");
-        load("controls", "treetableview");
+//        load("designer", "cards");
+//        load("designer", "banners");
+//        load("designer", "carousel");
+//        load("designer", "animated-button");
+//        load("designer", "alerts");
+//
+//        load("controls", "button");
+//        load("controls", "toggle");
+//        load("controls", "textfield");
+//        load("controls", "text-area");
+//        load("controls", "datepicker");
+//        load("controls", "checkbox");
+//        load("controls", "radiobutton");
+//        load("controls", "combobox");
+//        load("controls", "choicebox");
+//        load("controls", "splitmenubutton");
+//        load("controls", "menubutton");
+//        load("controls", "menubar");
+//        load("controls", "colorpicker");
+//        load("controls", "slider");
+//        load("controls", "spinner");
+//        load("controls", "progressbar");
+//        load("controls", "progressindicator");
+//        load("controls", "pagination");
+//        load("controls", "mediaview");
+//        load("controls", "listview");
+//        load("controls", "label");
+//        load("controls", "hyperlink");
+//        load("controls", "imageview");
+//        load("controls", "tableview");
+//        load("controls", "scrollbar");
+//        load("controls", "passwordfield");
+//        load("controls", "treeview");
+//        load("controls", "treetableview");
 
         load("dashboard", "dashboard");
 
-        load("charts", "piechart");
-        load("charts", "areachart");
-        load("charts", "barchart");
-        load("charts", "bubblechart");
-        load("charts", "linechart");
-        load("charts", "stackedbarchart");
-        load("charts", "stackedareachart");
-        load("charts", "scatterchart");
+//        load("charts", "piechart");
+//        load("charts", "areachart");
+//        load("charts", "barchart");
+//        load("charts", "bubblechart");
+//        load("charts", "linechart");
+//        load("charts", "stackedbarchart");
+//        load("charts", "stackedareachart");
+//        load("charts", "scatterchart");
 
         load("main",     "main");
 
-        load("profile", "profile");
+//        load("profile", "profile");
 
         load("login", "login");
-        load("login", "account");
 
 //        System.out.println(ViewManager.getInstance().getSize());
 
@@ -166,7 +166,7 @@ public class App extends Application {
         String log = logged();
         assert log != null;
 
-        if (log.equals("account") || log.equals("login")) {
+        if (log.equals("login")) {
             decorator.setContent(ViewManager.getInstance().get(log));
         } else {
             App.decorator.addCustom(userDetail);
@@ -252,7 +252,7 @@ public class App extends Application {
 
             if(!file.exists()){
                 file.createNewFile();
-                return "account";
+                return "login";
             } else {
                 FileInputStream fileInputStream = new FileInputStream(file);
                 properties.load(fileInputStream);
@@ -269,7 +269,7 @@ public class App extends Application {
                     else
                         return "main";
                 } else
-                    return "account";
+                    return "login";
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -5,7 +5,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
@@ -18,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<StackPane prefHeight="601.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.login.login">
+<StackPane prefHeight="601.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.login.login">
     <stylesheets>
         <URL value="@../../theme/css/material-color.css" />
         <URL value="@../../theme/css/skeleton.css" />
@@ -94,12 +93,7 @@
                                        </styleClass>
                                     </Button>
                                     <Label fx:id="lbl_error" styleClass="text-danger" text="Invalid username or password." visible="false" />
-                                    <HBox alignment="CENTER" prefHeight="17.0" prefWidth="289.0">
-                                       <children>
-                                          <Label text="Forgot your name of the" />
-                                          <Hyperlink text="user / password" />
-                                       </children>
-                                    </HBox>
+                                    <HBox alignment="CENTER" prefHeight="17.0" prefWidth="289.0" />
                                  </children>
                               </VBox>
                            </children>
@@ -116,11 +110,6 @@
                   </HBox>
                </children>
             </FlowPane>
-            <Hyperlink alignment="CENTER_RIGHT" contentDisplay="RIGHT" onMouseClicked="#switchCreate" text="Create your account">
-               <graphic>
-                  <SVGPath content="M16.01 11H4v2h12.01v3L20 12l-3.99-4z" />
-               </graphic>
-            </Hyperlink>
          </children>
       </VBox>
    </children>

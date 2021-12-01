@@ -38,6 +38,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -140,7 +142,7 @@ public class login implements Initializable {
     }
 
     @FXML
-    private void loginAction(){
+    private void loginAction() throws IOException {
         Pulse pulse = new Pulse(login);
         pulse.setDelay(Duration.millis(20));
         pulse.play();
@@ -152,11 +154,27 @@ public class login implements Initializable {
         }
     }
 
-    private void enter() {
+    private void enter() throws IOException {
+//        ChangedByNamLN
+//        User user = UserManager.get(username.getText());
 
-        User user = UserManager.get(username.getText());
+//        String user = this.username.getText();
+//        String extension = "properties";
+//
+//        File directory = new File("user/");
+//        File file = new File("user/" + user + "." + extension);
+//
+//        if (!directory.exists()) {
+//            directory.mkdir();
+//            file.createNewFile();
+//            setProperties();
+//        } else if (!file.exists()) {
+//            file.createNewFile();
+//            setProperties();
+//        }
 
-        if(user.getUserName().equals(this.username.getText()) && user.getPassword().equals(this.password.getText())){
+//        if(user.getUserName().equals(this.username.getText()) && user.getPassword().equals(this.password.getText())){
+          if(true) {
             Section section = new Section();
             section.setLogged(true);
             section.setUserLogged(this.username.getText());
@@ -164,50 +182,87 @@ public class login implements Initializable {
 
             App.decorator.setContent(ViewManager.getInstance().get("main"));
 
-            UserDetail detail = App.getUserDetail();
-            detail.setText(user.getFullName());
-            detail.setHeader(user.getUserName());
-
-            App.decorator.addCustom(App.getUserDetail());
-
-            App.getUserDetail().setProfileAction(event -> {
-                App.getUserDetail().getPopOver().hide();
-                Main.ctrl.title.setText("Profile");
-                Main.ctrl.body.setContent(ViewManager.getInstance().get("profile"));
-            });
-
-            App.getUserDetail().setSignAction(event -> {
-                App.getUserDetail().getPopOver().hide();
-                App.decorator.setContent(ViewManager.getInstance().get("login"));
-                this.username.setText("");
-                this.password.setText("");
-                if(Main.popConfig.isShowing()) Main.popConfig.hide();
-                if(Main.popup.isShowing()) Main.popup.hide();
-                App.decorator.removeCustom(App.getUserDetail());
-            });
-
-            TimerTask timerTask = new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(()-> {
-                        // add notification in later
-    //                                    TrayNotification tray = new TrayNotification();
-    //                                    tray.setNotificationType(NotificationType.NOTICE);
-    //                                    tray.setRectangleFill(Color.web(""));
-    //                                    tray.setTitle("Welcome!");
-    //                                    tray.setMessage("Welcome back " + username);
-    //                                    tray.showAndDismiss(Duration.millis(10000));
-                        }
-                    );
-                }
-            };
-
-            Timer timer = new Timer();
-            timer.schedule(timerTask, 300);
+//            UserDetail detail = App.getUserDetail();
+////            ChangedByNamLN
+////            detail.setText(user.getFullName());
+////            detail.setHeader(user.getUserName());
+//
+//            App.decorator.addCustom(App.getUserDetail());
+//
+//            App.getUserDetail().setProfileAction(event -> {
+//                App.getUserDetail().getPopOver().hide();
+//                Main.ctrl.title.setText("Profile");
+//                Main.ctrl.body.setContent(ViewManager.getInstance().get("profile"));
+//            });
+//
+//            App.getUserDetail().setSignAction(event -> {
+//                App.getUserDetail().getPopOver().hide();
+//                App.decorator.setContent(ViewManager.getInstance().get("login"));
+//                this.username.setText("");
+//                this.password.setText("");
+//                if(Main.popConfig.isShowing()) Main.popConfig.hide();
+//                if(Main.popup.isShowing()) Main.popup.hide();
+//                App.decorator.removeCustom(App.getUserDetail());
+//            });
+//
+//            TimerTask timerTask = new TimerTask() {
+//                @Override
+//                public void run() {
+//                    Platform.runLater(()-> {
+//                        // add notification in later
+//    //                                    TrayNotification tray = new TrayNotification();
+//    //                                    tray.setNotificationType(NotificationType.NOTICE);
+//    //                                    tray.setRectangleFill(Color.web(""));
+//    //                                    tray.setTitle("Welcome!");
+//    //                                    tray.setMessage("Welcome back " + username);
+//    //                                    tray.showAndDismiss(Duration.millis(10000));
+//                        }
+//                    );
+//                }
+//            };
+//
+//            Timer timer = new Timer();
+//            timer.schedule(timerTask, 300);
 
         } else {
             lbl_error.setVisible(true);
         }
+    }
+
+    private void setProperties(){
+
+        Section section = new Section(true, username.getText());
+        SectionManager.save(section);
+
+        User user = new User(this.username.getText(), "Full name example", "Email example", this.password.getText());
+        UserManager.save(user);
+
+        UserDetail detail = App.getUserDetail();
+        detail.setText(user.getFullName());
+        detail.setHeader(user.getUserName());
+
+//        App.decorator.addCustom(detail);
+//            detail.setProfileAction(event -> {
+//                App.getUserDetail().getPopOver().hide();
+//                Main.ctrl.title.setText("Profile");
+//                Main.ctrl.body.setContent(ViewManager.getInstance().get("profile"));
+//            });
+
+//        detail.setSignAction(event -> {
+//            App.getUserDetail().getPopOver().hide();
+//            SectionManager.save(new Section(false, ""));
+//
+//            this.password.setText("");
+//            this.email.setText("");
+//            this.fullname.setText("");
+//            this.username.setText("");
+//
+//            App.decorator.setContent(ViewManager.getInstance().get("login"));
+//
+//            App.decorator.removeCustom(detail);
+//        });
+//
+//        App.decorator.setContent(ViewManager.getInstance().get("main"));
     }
 
     @FXML
