@@ -45,20 +45,6 @@
 
 <h4> In the scene </h4>
 
-```java
-getScene().getStylesheets().addAll(
-    getClass().getResource("/com/gn/theme/css/fonts.css").toExternalForm(), // 1 
-    getClass().getResource("/com/gn/theme/css/material-color.css").toExternalForm(), // 2
-    getClass().getResource("/com/gn/theme/css/skeleton.css").toExternalForm(), // 3
-    getClass().getResource("/com/gn/theme/css/light.css").toExternalForm(), // 4
-    getClass().getResource("/com/gn/theme/css/bootstrap.css").toExternalForm(), // 5
-    getClass().getResource("/com/gn/theme/css/simple-info.css").toExternalForm(), // 6
-    getClass().getResource("/com/gn/theme/css/shape.css").toExternalForm(), // 7
-    getClass().getResource("/com/gn/theme/css/typographic.css").toExternalForm(), // 8
-    getClass().getResource("/com/gn/theme/css/helpers.css").toExternalForm(), // 9 
-    getClass().getResource("/com/gn/theme/css/master.css").toExternalForm() // 10
-);
-```
 * 1  Load fonts to use in a system that not have this font. 
 * 2  Contain a multiples colors used in all CSS system.
 * 3  This CSS override the default theme (Modena), return the max possible for 0% stylized.
@@ -94,11 +80,3 @@ getScene().getStylesheets().addAll(
   <URL value="@../../theme/css/master.css" />
   </stylesheets>
 ```
-          
-## Dashboard
-
-![Guide](src/com/gn/module/media/dash.png)
-
-    
-## Youtube view   
-[![Youtube link](src/com/gn/module/media/you.png)](https://youtu.be/hZsYU7UbWmU)

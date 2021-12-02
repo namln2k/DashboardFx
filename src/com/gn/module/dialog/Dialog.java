@@ -16,14 +16,9 @@
  */
 package com.gn.module.dialog;
 
-import com.gn.model.Transaction;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -40,9 +35,10 @@ public class Dialog implements Initializable {
 
     @FXML
     private void closeDialog(){
-        // get a handle to the stage
+        // Get a handle to the stage
         Stage stage = (Stage) btnCancel.getScene().getWindow();
-        // do what you have to do
+
+        // Close stage
         stage.close();
     }
 
