@@ -3,79 +3,77 @@ package com.gn.model;
 import java.util.Date;
 
 public class Transaction {
-    int stt;
-    String username, fullname, project, partner;
-    long money;
-    Date time;
-    String action, content, status;
+    private int transactionId;
+    private int memberId;
+    private int partnerId;
+    private String projectName;
+    private Date startTime;
+    private long totalMoney;
+    private String action;
+    private String content;
+    private int status;
 
-    public Transaction(int stt, String username, String fullname, String project, String partner, long money, Date time, String action, String content, String status) {
-        this.stt = stt;
-        this.username = username;
-        this.fullname = fullname;
-        this.project = project;
-        this.partner = partner;
-        this.money = money;
-        this.time = time;
+    public Transaction(int transactionId, int memberId, int partnerId, String projectName, Date startTime, long totalMoney, String action, String content, int status) {
+        this.transactionId = transactionId;
+        this.memberId = memberId;
+        this.partnerId = partnerId;
+        this.projectName = projectName;
+        this.startTime = startTime;
+        this.totalMoney = totalMoney;
         this.action = action;
         this.content = content;
         this.status = status;
     }
 
-    public int getStt() {
-        return stt;
+    public Transaction() {
     }
 
-    public void setStt(int stt) {
-        this.stt = stt;
+    public int getTransactionId() {
+        return transactionId;
     }
 
-    public String getUsername() {
-        return username;
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public String getFullname() {
-        return fullname;
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public int getPartnerId() {
+        return partnerId;
     }
 
-    public String getProject() {
-        return project;
+    public void setPartnerId(int partnerId) {
+        this.partnerId = partnerId;
     }
 
-    public void setProject(String project) {
-        this.project = project;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public String getPartner() {
-        return partner;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public void setPartner(String partner) {
-        this.partner = partner;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public long getMoney() {
-        return money;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public void setMoney(long money) {
-        this.money = money;
+    public long getTotalMoney() {
+        return totalMoney;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
+    public void setTotalMoney(long totalMoney) {
+        this.totalMoney = totalMoney;
     }
 
     public String getAction() {
@@ -94,11 +92,26 @@ public class Transaction {
         this.content = content;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", memberId=" + memberId +
+                ", partnerId=" + partnerId +
+                ", projectName='" + projectName + '\'' +
+                ", startTime=" + startTime +
+                ", totalMoney=" + totalMoney +
+                ", action='" + action + '\'' +
+                ", content='" + content + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

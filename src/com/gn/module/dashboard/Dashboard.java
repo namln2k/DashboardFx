@@ -76,17 +76,14 @@ public class Dashboard implements Initializable {
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            table_data.add(new Transaction(1, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(2, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(3, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(4, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(5, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(6, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(7, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-            table_data.add(new Transaction(8, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-        } catch (ParseException e) {
-        }
+        //            table_data.add(new Transaction(1, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(2, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(3, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(4, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(5, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(6, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(7, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
+//            table_data.add(new Transaction(8, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
 
         col_stt.setCellValueFactory(new PropertyValueFactory<>("stt"));
         col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -104,9 +101,9 @@ public class Dashboard implements Initializable {
 
     @FXML
     private void deleteRow(ActionEvent event) {
-        if (table_view.getSelectionModel().getSelectedItem() != null) {
-            System.out.println(table_view.getSelectionModel().getSelectedItem().getStt());
-        }
+//        if (table_view.getSelectionModel().getSelectedItem() != null) {
+//            System.out.println(table_view.getSelectionModel().getSelectedItem().getStt());
+//        }
     }
 
     @FXML
