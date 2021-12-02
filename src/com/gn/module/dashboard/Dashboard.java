@@ -113,7 +113,6 @@ public class Dashboard implements Initializable {
     void openDialog(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/gn/module/dialog/dialog.fxml"));
         Parent parent = fxmlLoader.load();
-//        Dialog dialogController = fxmlLoader.<Dialog>getController();
 
         Scene scene = new Scene(parent, 900, 600);
         Stage stage = new Stage();

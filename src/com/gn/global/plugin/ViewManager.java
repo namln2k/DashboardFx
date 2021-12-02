@@ -16,8 +16,6 @@
  */
 package com.gn.global.plugin;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 import java.util.HashMap;
@@ -30,35 +28,26 @@ public class ViewManager {
 
     private static ViewManager instance;
     private static final HashMap<String, Node> SCREENS = new HashMap<>();
-    private static String nameView;
 
-    private ViewManager(){}
+    private ViewManager() {
+    }
 
     public static ViewManager getInstance() {
-        if(instance == null){
-            instance =  new ViewManager();
+        if (instance == null) {
+            instance = new ViewManager();
         }
         return instance;
     }
 
-    public void put(String name, Node node){
-        nameView = name;
+    public void put(String name, Node node) {
         SCREENS.put(name, node);
     }
 
-    public Node get(String view){
+    public Node get(String view) {
         return SCREENS.get(view);
     }
 
-    public int getSize(){
+    public int getSize() {
         return SCREENS.size();
-    }
-
-    Node getCurrentView(){
-        return SCREENS.get(nameView);
-    }
-
-    public ObservableList<Node> getAll(){
-        return FXCollections.observableArrayList(SCREENS.values());
     }
 }

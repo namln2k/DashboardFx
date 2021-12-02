@@ -40,7 +40,7 @@ public class Loader extends Preloader {
     private Stage stage;
 
     @Override
-    public void init(){
+    public void init() {
         try {
             view = FXMLLoader.load(getClass().getResource("/com/gn/module/loader/loader.fxml"));
         } catch (IOException e) {
@@ -49,7 +49,7 @@ public class Loader extends Preloader {
     }
 
     @Override
-    public void start(Stage primary){
+    public void start(Stage primary) {
         stage = primary;
         primary.initStyle(StageStyle.TRANSPARENT);
         Scene scene = new Scene(view);
@@ -58,15 +58,12 @@ public class Loader extends Preloader {
         progressBar = (JFXProgressBar) scene.lookup("#progressBar");
         primary.getIcons().add(new Image("/com/gn/module/media/icon.png"));
         primary.setScene(scene);
-//        primary.setAlwaysOnTop(true);
         primary.show();
 
     }
 
     @Override
     public synchronized void handleApplicationNotification(Preloader.PreloaderNotification info) {
-        // Handle application notification in this point (see MyApplication#Init).
-
         if (info instanceof Preloader.ProgressNotification) {
             double x = ((Preloader.ProgressNotification) info).getProgress();
 
@@ -78,7 +75,6 @@ public class Loader extends Preloader {
     @Override
     public void handleStateChangeNotification(StateChangeNotification info) {
         // Handle state change notifications.
-
         StateChangeNotification.Type type = info.getType();
         switch (type) {
             case BEFORE_LOAD:
