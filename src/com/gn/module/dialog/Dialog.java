@@ -16,8 +16,11 @@
  */
 package com.gn.module.dialog;
 
+import com.gn.App;
+import com.gn.database.DbUtil;
 import com.gn.global.Formatter;
 import com.gn.model.TableData;
+import com.gn.model.Transaction;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,6 +61,8 @@ public class Dialog implements Initializable {
     @FXML
     private Label lblTitle;
 
+    private DbUtil dbUtil = new DbUtil();
+
     public TableData getTarget() {
         return target;
     }
@@ -93,15 +98,25 @@ public class Dialog implements Initializable {
         String status = this.txfStatus.getText();
         String content = this.txaContent.getText();
 
+        Transaction transaction = new Transaction(
+                App.member.getMemberId(),
+                1,
+                project,
+                time,
+                money,
+                action,
+                content,
+                1
+        );
 //        TODO: Thêm các thuộc tính khác để khởi tạo Transaction để thực hiện truy vấn
 
         if (target.getIndex() == 0) {
 //            TODO: Đây là trường hợp thêm Transaction mới
-
+            dbUtil.addTransaction(transaction);
         }
         else {
 //            TODO: Đây là trường hợp update Transaction
-
+            dbUtil.updateTransaction(transaction);
         }
     }
 

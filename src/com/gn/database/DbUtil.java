@@ -1,5 +1,7 @@
 package com.gn.database;
 
+import com.gn.model.Member;
+import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.model.Transaction;
 
@@ -30,7 +32,7 @@ public class DbUtil {
         Transaction transaction = new Transaction(6, 1, 2, "LMHT", new Date(), 1000000000, "chi", "noi dung giao dich", 2);
 //        dbUtil.updateTransaction(transaction);
 //        dbUtil.deleteTransaction(2);
-        System.out.println(dbUtil.checkAccount("sonnv123", "123456"));
+        System.out.println(dbUtil.getAccountMember("sonnv123", "123456"));
     }
 
     public List<Transaction> getDataTransaction() {
@@ -53,7 +55,7 @@ public class DbUtil {
     public List<TableData> getDataTable() {
         List<TableData> data = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t, memmber m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.parter_id and a.account_id = m.account_id";
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t,  m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id and a.account_id = m.account_id";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
             int index = 0;
@@ -61,6 +63,7 @@ public class DbUtil {
                 index++;
                 data.add(new TableData(rs.getInt("transaction_id"), index, rs.getString("username"), rs.getString("fullname"), rs.getString("project_name"), rs.getString("name"), rs.getLong("total_money"), rs.getDate("start_time"), rs.getString("action"), rs.getString("content"), rs.getInt("status")));
             }
+            connection.close();
             return data;
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,21 +127,58 @@ public class DbUtil {
         }
     }
 
-    public boolean checkAccount(String username, String password) {
-//        TODO:   - Nếu validate thành công thì trả về Member với đầy đủ thông tin. Nếu fail thì trả về Member có memberId = 0
-//                - Dùng hàm khởi tạo mặc định Member() để memberId = 0, em đã viết sẵn rồi nhé
+    public Member getAccountMember(String username, String password) {
 
         try {
-            String sqlQuery = "SELECT * FROM account WHERE username = ? and password = ?";
+            String sqlQuery = "SELECT member.* \n" +
+                    "FROM member \n" +
+                    "WHERE member.account_id  = (SELECT account_id FROM account WHERE username = ? and password = ?)";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, username);
             stmt.setString(2, password);
 
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
+            Member member;
+            if (rs.next()) {
+                member = new Member(
+                        rs.getInt("member_id"),
+                        rs.getInt("account_id"),
+                        rs.getString("fullname"),
+                        rs.getString("gender"),
+                        rs.getDate("birthday"),
+                        rs.getString("phone_number"),
+                        rs.getString("address"),
+                        rs.getString("tax_code"));
+            } else {
+                member = new Member();
+            }
+            connection.close();
+            return member;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return new Member();
+        }
+    }
+
+    public List<Partner> getListPartner() {
+        List<Partner> partners = new ArrayList<>();
+        try {
+            String sqlQuery = "SELECT * FROM partner";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            while (rs.next()) {
+                partners.add(new Partner(
+                        rs.getInt("partner_id"),
+                        rs.getString("name"),
+                        rs.getString("phone_number"),
+                        rs.getString("address")
+                ));
+            }
+            connection.close();
+            return partners;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

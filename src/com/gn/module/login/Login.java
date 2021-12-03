@@ -21,7 +21,7 @@ import com.gn.App;
 import com.gn.GNAvatarView;
 import com.gn.database.DbUtil;
 import com.gn.global.plugin.ViewManager;
-import com.gn.model.Account;
+import com.gn.model.Member;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -108,9 +108,9 @@ public class Login implements Initializable {
         String username = this.username.getText();
         String password = this.password.getText();
         DbUtil dbUtil = new DbUtil();
-        if (dbUtil.checkAccount(username, password)) {
-//          TODO: Set member information for app
-
+        Member user = dbUtil.getAccountMember(username, password);
+        if (user.getMemberId() != 0) {
+            App.member = user;
             App.decorator.setContent(ViewManager.getInstance().get("main"));
         } else {
             lblError.setVisible(true);
