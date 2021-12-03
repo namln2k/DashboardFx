@@ -16,9 +16,12 @@
  */
 package com.gn.module.dialog;
 
+import com.gn.global.*;
+import com.gn.model.TableData;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -31,19 +34,73 @@ import java.util.ResourceBundle;
  */
 public class Dialog implements Initializable {
 
-    @FXML private Button btnCancel;
+    private static TableData target = new TableData();
+    @FXML
+    private TextField txfProject;
+    @FXML
+    private ComboBox<String> cbxPartner;
+    @FXML
+    private TextField txfMoney;
+    @FXML
+    private DatePicker dpkTime;
+    @FXML
+    private TextField txfAction;
+    @FXML
+    private TextField txfStatus;
+    @FXML
+    private TextArea txaContent;
+    @FXML
+    private Button btnProcess;
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private Label lblTitle;
+
+    public TableData getTarget() {
+        return target;
+    }
+
+    public static void setTarget(TableData targetObject) {
+        target = targetObject;
+    }
 
     @FXML
-    private void closeDialog(){
-        // Get a handle to the stage
+    private void closeDialog() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
 
-        // Close stage
         stage.close();
+    }
+
+    private void setValues(TableData data) {
+        txfProject.setText(target.getProject());
+        if (target.getMoney() != 0) {
+            txfMoney.setText(String.valueOf(target.getMoney()));
+        }
+        dpkTime.setValue(Formatter.toLocalDate(target.getTime()));
+        com.gn.global.ComboBox.setValue(cbxPartner, target.getPartner());
+        txfAction.setText(target.getAction());
+        txaContent.setText(target.getContent());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (target.getIndex() == 0) {
+            lblTitle.setText("Thêm giao dịch");
+            btnProcess.setText("Thêm");
+        } else {
+            lblTitle.setText("Thông tin giao dịch");
+            btnProcess.setText("Cập nhật");
+        }
+        setValues(target);
+    }
 
+    @FXML
+    private void resetDialog() {
+        setValues(target);
+    }
+
+    @FXML
+    private void processDialog() {
+//        setValues(target);
     }
 }

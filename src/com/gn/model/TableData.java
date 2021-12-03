@@ -15,6 +15,7 @@ public class TableData {
     private int status;
 
     public TableData() {
+        this.index = 0;
     }
 
     public TableData(int index, String username, String fullName, String project, String partner, long money, Date time, String action, String content, int status) {
@@ -28,6 +29,10 @@ public class TableData {
         this.action = action;
         this.content = content;
         this.status = status;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public String getUsername() {

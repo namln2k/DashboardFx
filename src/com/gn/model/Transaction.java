@@ -1,6 +1,5 @@
 package com.gn.model;
 
-
 import java.util.Date;
 
 public class Transaction {

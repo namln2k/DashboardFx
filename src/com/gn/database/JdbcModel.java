@@ -2,7 +2,6 @@ package com.gn.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class JdbcModel {
     /**
@@ -12,7 +11,7 @@ public class JdbcModel {
      */
     public Connection getConnectionOf() {
         Connection objConn = null;
-        String sConnURL = null;
+        String sConnURL;
         JdbcObject objEntity = new JdbcObject(
                 DatabaseConfig.SERVER_IP,
                 DatabaseConfig.SERVER_USER_NAME,

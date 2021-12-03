@@ -83,7 +83,7 @@
                                         <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0"
                                               HBox.hgrow="ALWAYS">
                                             <children>
-                                                <JFXBadge fx:id="bg_info" layoutX="732.0" layoutY="12.0"
+                                                <JFXBadge fx:id="tableDatainfo" layoutX="732.0" layoutY="12.0"
                                                           position="TOP_RIGHT" prefHeight="44.0" prefWidth="35.0"
                                                           text="32" visible="false">
                                                     <styleClass>

@@ -50,9 +50,9 @@ public class Login implements Initializable {
     @FXML
     private GNAvatarView avatar;
     @FXML
-    private HBox box_username;
+    private HBox boxUsername;
     @FXML
-    private HBox box_password;
+    private HBox boxPassword;
     @FXML
     private TextField username;
     @FXML
@@ -61,11 +61,11 @@ public class Login implements Initializable {
     private Button login;
 
     @FXML
-    private Label lbl_password;
+    private Label lblPassword;
     @FXML
-    private Label lbl_username;
+    private Label lblUsername;
     @FXML
-    private Label lbl_error;
+    private Label lblError;
 
     private RotateTransition rotateTransition = new RotateTransition();
 
@@ -114,7 +114,7 @@ public class Login implements Initializable {
         if (dbUtil.checkAccount(username, password)) {
             App.decorator.setContent(ViewManager.getInstance().get("main"));
         } else {
-            lbl_error.setVisible(true);
+            lblError.setVisible(true);
         }
     }
 }
