@@ -21,6 +21,7 @@ import animatefx.animation.Pulse;
 import animatefx.animation.SlideInLeft;
 import com.gn.App;
 import com.gn.GNAvatarView;
+import com.gn.database.DbUtil;
 import com.gn.global.Section;
 import com.gn.global.plugin.SectionManager;
 import com.gn.global.plugin.ViewManager;
@@ -79,8 +80,6 @@ public class Login implements Initializable {
         addEffect(password);
         addEffect(username);
 
-        setupListeners();
-
     }
 
     private void addEffect(Node node) {
@@ -100,70 +99,19 @@ public class Login implements Initializable {
         });
     }
 
-    private void setupListeners() {
-        password.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!validPassword()) {
-                if (!newValue) {
-                    Flash swing = new Flash(box_password);
-                    lbl_password.setVisible(true);
-                    new SlideInLeft(lbl_password).play();
-                    swing.setDelay(Duration.millis(100));
-                    swing.play();
-                    box_password.setStyle("-icon-color : -danger; -fx-border-color : -danger");
-                } else {
-                    lbl_password.setVisible(false);
-                }
-            } else {
-                lbl_error.setVisible(false);
-            }
-        });
-
-        username.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!validUsername()) {
-                if (!newValue) {
-                    Flash swing = new Flash(box_username);
-                    lbl_username.setVisible(true);
-                    new SlideInLeft(lbl_username).play();
-                    swing.setDelay(Duration.millis(100));
-                    swing.play();
-                    box_username.setStyle("-icon-color : -danger; -fx-border-color : -danger");
-                } else {
-                    lbl_username.setVisible(false);
-                }
-            } else {
-                lbl_error.setVisible(false);
-            }
-        });
-    }
-
-    private boolean validPassword() {
-        return !password.getText().isEmpty() && password.getLength() > 3;
-    }
-
-    private boolean validUsername() {
-        return !username.getText().isEmpty() && username.getLength() > 3;
-    }
-
     @FXML
     private void loginAction() throws IOException {
         Pulse pulse = new Pulse(login);
         pulse.setDelay(Duration.millis(20));
         pulse.play();
-        if (validPassword() && validUsername())
-            enter();
-        else {
-            lbl_password.setVisible(true);
-            lbl_username.setVisible(true);
-        }
+        enter();
     }
 
     private void enter() {
-        if (true) {
-            Section section = new Section();
-            section.setLogged(true);
-            section.setUserLogged(this.username.getText());
-            SectionManager.save(section);
-
+        String username = this.username.getText();
+        String password = this.password.getText();
+        DbUtil dbUtil = new DbUtil();
+        if (dbUtil.checkAccount(username, password)) {
             App.decorator.setContent(ViewManager.getInstance().get("main"));
         } else {
             lbl_error.setVisible(true);

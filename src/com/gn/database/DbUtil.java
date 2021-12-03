@@ -1,5 +1,7 @@
 package com.gn.database;
 
+import com.gn.model.Member;
+import com.gn.model.TableData;
 import com.gn.model.Transaction;
 
 import java.sql.*;
@@ -47,6 +49,37 @@ public class DbUtil {
             return null;
         }
         return transactions;
+    }
+
+    public List<TableData> getDataTable() {
+        List<TableData> data = new ArrayList<>();
+        try {
+            String sqlQuery = "SELECT a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" +
+                    "FROM transaction t, memmber m, partner p, account a\n" +
+                    "where t.member_id = m.member_id and t.partner_id = p.parter_id and a.account_id = m.account_id";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlQuery);
+            int index = 0;
+            while (rs.next()) {
+                index++;
+                data.add(new TableData(
+                        index,
+                        rs.getString("username"),
+                        rs.getString("fullname"),
+                        rs.getString("project_name"),
+                        rs.getString("name"),
+                        rs.getLong("total_money"),
+                        rs.getDate("start_time"),
+                        rs.getString("action"),
+                        rs.getString("content"),
+                        rs.getInt("status")
+                ));
+            }
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void addTransaction(Transaction transaction) {

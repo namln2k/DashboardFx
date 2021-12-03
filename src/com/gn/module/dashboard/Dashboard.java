@@ -16,6 +16,9 @@
  */
 package com.gn.module.dashboard;
 
+import com.gn.database.DbUtil;
+import com.gn.model.Member;
+import com.gn.model.TableData;
 import com.gn.model.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,7 +39,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -47,44 +52,35 @@ import java.util.ResourceBundle;
 public class Dashboard implements Initializable {
 
     @FXML
-    private TableView<Transaction> table_view;
+    private TableView<TableData> table_view;
     @FXML
-    private TableColumn<Transaction, Integer> col_stt;
+    private TableColumn<TableData, Integer> col_stt;
     @FXML
-    private TableColumn<Transaction, String> col_username;
+    private TableColumn<TableData, String> col_username;
     @FXML
-    private TableColumn<Transaction, String> col_fullname;
+    private TableColumn<TableData, String> col_fullname;
     @FXML
-    private TableColumn<Transaction, String> col_project;
+    private TableColumn<TableData, String> col_project;
     @FXML
-    private TableColumn<Transaction, String> col_partner;
+    private TableColumn<TableData, String> col_partner;
     @FXML
-    private TableColumn<Transaction, Long> col_money;
+    private TableColumn<TableData, Long> col_money;
     @FXML
-    private TableColumn<Transaction, Date> col_time;
+    private TableColumn<TableData, Date> col_time;
     @FXML
-    private TableColumn<Transaction, String> col_action;
+    private TableColumn<TableData, String> col_action;
     @FXML
-    private TableColumn<Transaction, String> col_content;
+    private TableColumn<TableData, String> col_content;
     @FXML
-    private TableColumn<Transaction, String> col_status;
-    @FXML
-    private Button btn_delete;
+    private TableColumn<TableData, String> col_status;
 
-    ObservableList<Transaction> table_data = FXCollections.observableArrayList();
+    private DbUtil dbUtil = new DbUtil();
+
+    ObservableList<TableData> table_data = FXCollections.observableArrayList();
 
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //            table_data.add(new Transaction(1, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(2, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(3, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(4, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(5, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(6, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(7, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-//            table_data.add(new Transaction(8, "ten_dang_nhap", "Le Nhat Nam", "du_an", "doi_tac", 1000000, new SimpleDateFormat("dd/MM/yyyy").parse("25/11/2021"), "hanh_dong", "noi_dung", "trang_thai"));
-
         col_stt.setCellValueFactory(new PropertyValueFactory<>("stt"));
         col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
         col_fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
@@ -96,7 +92,15 @@ public class Dashboard implements Initializable {
         col_content.setCellValueFactory(new PropertyValueFactory<>("content"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        table_data.addAll(updateData());
+
         table_view.setItems(table_data);
+    }
+
+    public List<TableData> updateData() {
+        List<TableData> tableData = new ArrayList<>();
+        tableData.addAll(dbUtil.getDataTable());
+        return tableData;
     }
 
     @FXML
