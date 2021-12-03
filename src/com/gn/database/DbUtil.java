@@ -54,7 +54,7 @@ public class DbUtil {
     public List<TableData> getDataTable() {
         List<TableData> data = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" +
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" +
                     "FROM transaction t, memmber m, partner p, account a\n" +
                     "where t.member_id = m.member_id and t.partner_id = p.parter_id and a.account_id = m.account_id";
             Statement stmt = connection.createStatement();
@@ -63,6 +63,7 @@ public class DbUtil {
             while (rs.next()) {
                 index++;
                 data.add(new TableData(
+                        rs.getInt("transaction_id"),
                         index,
                         rs.getString("username"),
                         rs.getString("fullname"),
