@@ -17,9 +17,7 @@
 package com.gn.module.dashboard;
 
 import com.gn.database.DbUtil;
-import com.gn.model.Member;
 import com.gn.model.TableData;
-import com.gn.model.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +26,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,8 +34,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +53,7 @@ public class Dashboard implements Initializable {
     @FXML
     private TableColumn<TableData, String> col_username;
     @FXML
-    private TableColumn<TableData, String> col_fullname;
+    private TableColumn<TableData, String> col_fullName;
     @FXML
     private TableColumn<TableData, String> col_project;
     @FXML
@@ -81,9 +76,9 @@ public class Dashboard implements Initializable {
     @SuppressWarnings("unchecked")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        col_stt.setCellValueFactory(new PropertyValueFactory<>("stt"));
+        col_stt.setCellValueFactory(new PropertyValueFactory<>("index"));
         col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
-        col_fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
+        col_fullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         col_project.setCellValueFactory(new PropertyValueFactory<>("project"));
         col_partner.setCellValueFactory(new PropertyValueFactory<>("partner"));
         col_money.setCellValueFactory(new PropertyValueFactory<>("money"));

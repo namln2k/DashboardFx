@@ -3,6 +3,7 @@ package com.gn.model;
 import java.util.Date;
 
 public class TableData {
+    private int transactionId;
     private int index;
     private String username;
     private String fullName;
@@ -12,9 +13,23 @@ public class TableData {
     private Date time;
     private String action;
     private String content;
-    private int status;
+    private String status;
 
     public TableData() {
+    }
+
+    public TableData(int transactionId, int index, String username, String fullName, String project, String partner, long money, Date time, String action, String content, int status) {
+        this.transactionId = transactionId;
+        this.index = index;
+        this.username = username;
+        this.fullName = fullName;
+        this.project = project;
+        this.partner = partner;
+        this.money = money;
+        this.time = time;
+        this.action = action;
+        this.content = content;
+        this.status = status == 1 ? "Completed" : "Pending";
     }
 
     public TableData(int index, String username, String fullName, String project, String partner, long money, Date time, String action, String content, int status) {
@@ -27,7 +42,23 @@ public class TableData {
         this.time = time;
         this.action = action;
         this.content = content;
-        this.status = status;
+        this.status = status == 1 ? "Completed" : "Pending";
+    }
+
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getUsername() {
@@ -94,11 +125,11 @@ public class TableData {
         this.content = content;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
     public void setStatus(int status) {
-        this.status = status;
+        this.status = status == 1 ? "Completed" : "Pending";
     }
 }
