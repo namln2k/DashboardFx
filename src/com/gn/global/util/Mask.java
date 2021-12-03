@@ -19,8 +19,6 @@ package com.gn.global.util;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
@@ -33,7 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Version 1.0
  */
 public class Mask {
-    public static void noSpaces(TextField field){
+    public static void noSpaces(TextField field) {
         field.lengthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -102,7 +100,7 @@ public class Mask {
 
     public static void nameField(final TextField field) {
         field.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue){
+            if (!newValue) {
                 String text = field.getText();
                 String[] parts = text.split(" ");
                 StringBuilder sb = new StringBuilder();
@@ -120,14 +118,14 @@ public class Mask {
     }
 
 
-    public static boolean isEmail(TextField field)  { // KeyPressed
+    public static boolean isEmail(TextField field) { // KeyPressed
         boolean is = false;
         if (!field.getText().isEmpty()) {
             if (field.getText().contains("@") && field.getText().contains(".") && !field.getText().contains(" ")) {
 
                 String user = field.getText().substring(0, field.getText().lastIndexOf('@'));
-                String domain = field.getText().substring(field.getText().lastIndexOf('@') + 1, field.getText().length());
-                String subdomain = field.getText().substring(field.getText().indexOf(".") + 1, field.getText().length());
+                String domain = field.getText().substring(field.getText().lastIndexOf('@') + 1);
+                String subdomain = field.getText().substring(field.getText().indexOf(".") + 1);
 
                 if ((user.length() >= 1) && (!user.contains("@")) &&
                         (domain.contains(".")) && (!domain.contains("@"))
@@ -141,7 +139,7 @@ public class Mask {
         return is;
     }
 
-    public static void emailField(TextField field){
+    public static void emailField(TextField field) {
         field.lengthProperty().addListener((observable, oldValue, newValue) -> {
             if (field.getText() != null) {
                 if (field.getText().length() > 0) {

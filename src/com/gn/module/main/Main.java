@@ -16,6 +16,7 @@
  */
 package com.gn.module.main;
 
+import com.gn.App;
 import com.gn.global.plugin.ViewManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,11 +35,11 @@ import java.util.ResourceBundle;
 public class Main implements Initializable {
 
     @FXML
-    private VBox views;
-    @FXML
     public ScrollPane body;
     @FXML
     public Label title;
+    @FXML
+    public Label lblUsername;
 
     public static Main ctrl;
 
@@ -48,6 +49,9 @@ public class Main implements Initializable {
 
         // Set main scene to dashboard
         body.setContent(ViewManager.getInstance().get("dashboard"));
+
+        // Set username
+        lblUsername.setText(App.member.getFullName());
     }
 
     @FXML

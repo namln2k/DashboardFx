@@ -43,15 +43,15 @@ import javafx.scene.text.TextFlow;
 public class AlertCell extends HBox {
 
     private FontAwesomeIconView fontIcon;
-    private ImageView           imageView;
-    private SVGPath             path;
+    private ImageView imageView;
+    private SVGPath path;
 
-    private VBox content = new VBox();
+    private final VBox content = new VBox();
 
-    private TextFlow textFlow = new TextFlow();
-    private Text text = new Text();
+    private final TextFlow textFlow = new TextFlow();
+    private final Text text = new Text();
     private Label title = new Label("tile");
-    private Label time  = new Label("n minutes ago");
+    private Label time = new Label("n minutes ago");
 
     public AlertCell(String title, String text, String time) {
         this.title.setText(title);
@@ -90,7 +90,7 @@ public class AlertCell extends HBox {
         config();
     }
 
-    private void config(){
+    private void config() {
         this.getStyleClass().add("alert-cell");
         this.setAlignment(Pos.CENTER_LEFT);
         this.setPrefHeight(40D);
@@ -107,32 +107,30 @@ public class AlertCell extends HBox {
         GridPane.setHalignment(this.time, HPos.RIGHT);
         GridPane.setValignment(this.time, VPos.CENTER);
         GridPane.setHgrow(this.time, Priority.ALWAYS);
-        HBox.setMargin(this.content, new Insets(0,0,0,10));
+        HBox.setMargin(this.content, new Insets(0, 0, 0, 10));
     }
-
-    public void setTitle(Label title) {
-        title.setStyle("-fx-text-fill : -text-color;");
-        this.title = title;
-    }
-
 
     public void setTime(Label time) {
         time.setStyle("-fx-text-fill : -text-color;");
         this.time = time;
     }
 
-    public void setIcon(FontAwesomeIconView icon){
+    public FontAwesomeIconView getIcon() {
+        return fontIcon;
+    }
+
+    public void setIcon(FontAwesomeIconView icon) {
         icon.setStyle("-fx-fill : -text-color;");
         this.getChildren().add(icon);
         icon.toBack();
     }
 
-    public void setIcon(ImageView icon){
+    public void setIcon(ImageView icon) {
         this.getChildren().add(icon);
         icon.toBack();
     }
 
-    public void setIcon(GNAvatarView icon){
+    public void setIcon(GNAvatarView icon) {
         icon.setType(AvatarType.CIRCLE);
         icon.setStrokeWidth(0);
         icon.setStroke(Color.WHITE);
@@ -141,16 +139,17 @@ public class AlertCell extends HBox {
         icon.toBack();
     }
 
-    public void setIcon(SVGPath icon){
+    public void setIcon(SVGPath icon) {
         this.getChildren().add(icon);
         icon.toBack();
     }
 
-    public FontAwesomeIconView getIcon() {
-        return fontIcon;
-    }
-
     public Label getTitle() {
         return title;
+    }
+
+    public void setTitle(Label title) {
+        title.setStyle("-fx-text-fill : -text-color;");
+        this.title = title;
     }
 }

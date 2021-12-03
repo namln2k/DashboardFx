@@ -19,9 +19,8 @@ package com.gn;
 
 import com.gn.decorator.GNDecorator;
 import com.gn.decorator.options.ButtonType;
-import com.gn.global.Section;
-import com.gn.global.plugin.SectionManager;
 import com.gn.global.plugin.ViewManager;
+import com.gn.model.Member;
 import com.gn.module.loader.Loader;
 import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
@@ -34,11 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Properties;
 
 /**
  * Init the app class.
@@ -49,16 +44,24 @@ import java.util.Properties;
  */
 public class App extends Application {
 
+    public static final GNDecorator decorator = new GNDecorator();
+    public static final Scene scene = decorator.getScene();
+    public static ObservableList<String> stylesheets;
+    public static HostServices hostServices;
+    public static Member member = new Member();
     private float increment = 0;
     private float progress = 0;
 
-    private Section section;
+    public static GNDecorator getDecorator() {
+        return decorator;
+    }
+
+    public static void main(String[] args) {
+        LauncherImpl.launchApplication(App.class, Loader.class, args);
+    }
 
     @Override
     public synchronized void init() {
-        // Get section
-        section = SectionManager.get();
-
         // Increment for preload progress bar
         float total = 43;
         increment = 100f / total;
@@ -67,7 +70,7 @@ public class App extends Application {
         load("dashboard", "dashboard");
         load("main", "main");
         load("profile", "profile");
-        load("Login", "Login");
+        load("Login", "login");
 
         // Wait for modules to load
         try {
@@ -75,16 +78,6 @@ public class App extends Application {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public static final GNDecorator decorator = new GNDecorator();
-    public static final Scene scene = decorator.getScene();
-
-    public static ObservableList<String> stylesheets;
-    public static HostServices hostServices;
-
-    public static GNDecorator getDecorator() {
-        return decorator;
     }
 
     private void configServices() {
@@ -95,16 +88,7 @@ public class App extends Application {
         decorator.setTitle("DashboardFx");
         decorator.addButton(ButtonType.FULL_EFFECT);
         decorator.initTheme(GNDecorator.Theme.DEFAULT);
-
-        String log = logged();
-        assert log != null;
-
-        if (log.equals("Login")) {
-            decorator.setContent(ViewManager.getInstance().get(log));
-        } else {
-            decorator.setContent(ViewManager.getInstance().get("main"));
-        }
-
+        decorator.setContent(ViewManager.getInstance().get("login"));
         decorator.getStage().setOnCloseRequest(event -> {
             Platform.exit();
         });
@@ -113,37 +97,21 @@ public class App extends Application {
     @Override
     public void start(Stage primary) {
         configServices();
+
         initialScene();
 
         stylesheets = decorator.getScene().getStylesheets();
 
-        stylesheets.addAll(
-                getClass().getResource("/com/gn/theme/css/fonts.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/material-color.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/skeleton.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/light.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/bootstrap.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/shape.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/typographic.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/helpers.css").toExternalForm(),
-                getClass().getResource("/com/gn/theme/css/master.css").toExternalForm()
-        );
+        stylesheets.addAll(getClass().getResource("/com/gn/theme/css/fonts.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/material-color.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/skeleton.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/light.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/bootstrap.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/shape.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/typographic.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/helpers.css").toExternalForm(), getClass().getResource("/com/gn/theme/css/master.css").toExternalForm());
 
         decorator.setMaximized(true);
         decorator.getStage().getIcons().add(new Image("/com/gn/module/media/logo2.png"));
         decorator.show();
     }
 
-    public static void main(String[] args) {
-        LauncherImpl.launchApplication(App.class, Loader.class, args);
-    }
-
     private void load(String module, String name) {
         try {
-            ViewManager.getInstance().put(
-                    name,
-                    FXMLLoader.load(getClass().getResource("/com/gn/module/" + module + "/" + name + ".fxml"))
-            );
+            ViewManager.getInstance().put(name, FXMLLoader.load(getClass().getResource("/com/gn/module/" + module + "/" + name + ".fxml")));
             preloaderNotify();
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,37 +121,5 @@ public class App extends Application {
     private synchronized void preloaderNotify() {
         progress += increment;
         LauncherImpl.notifyPreloader(this, new Preloader.ProgressNotification(progress));
-    }
-
-    private String logged() {
-        try {
-            File file = new File("dashboard.properties");
-            Properties properties = new Properties();
-
-            if (!file.exists()) {
-                file.createNewFile();
-                return "Login";
-            } else {
-                FileInputStream fileInputStream = new FileInputStream(file);
-                properties.load(fileInputStream);
-                properties.putIfAbsent("logged", "false");
-                FileOutputStream fileOutputStream = new FileOutputStream(file);
-                properties.store(fileOutputStream, "Dashboard properties");
-
-
-                File directory = new File("user/");
-                properties.load(fileInputStream);
-                if (directory.exists()) {
-                    if (properties.getProperty("logged").equals("false"))
-                        return "Login";
-                    else
-                        return "main";
-                } else
-                    return "Login";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

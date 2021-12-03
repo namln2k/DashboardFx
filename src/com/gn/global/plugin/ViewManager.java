@@ -26,8 +26,8 @@ import java.util.HashMap;
  */
 public class ViewManager {
 
-    private static ViewManager instance;
     private static final HashMap<String, Node> SCREENS = new HashMap<>();
+    private static ViewManager instance;
 
     private ViewManager() {
     }

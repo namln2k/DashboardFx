@@ -2,116 +2,105 @@
 
 <?import com.gn.GNAvatarView?>
 <?import com.jfoenix.controls.JFXBadge?>
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
-<?import java.lang.*?>
-<?import java.net.*?>
-<StackPane fx:id="root" prefHeight="653.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/8.0.171"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.main.Main">
+
+<StackPane fx:id="root" prefHeight="653.0" prefWidth="1106.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.main.Main">
     <children>
         <HBox fx:id="main" prefHeight="100.0" prefWidth="200.0">
             <children>
-                <VBox fx:id="drawer" alignment="TOP_CENTER" prefHeight="651.0" prefWidth="250.0"
-                      stylesheets="@drawer.css">
-                    <GNAvatarView fx:id="avatar" minHeight="-Infinity" prefHeight="181.0" prefWidth="249.0"
-                                  type="CIRCLE">
+                <VBox fx:id="drawer" alignment="TOP_CENTER" prefHeight="651.0" prefWidth="250.0" spacing="10.0" stylesheets="@drawer.css">
+                    <GNAvatarView fx:id="avatar" minHeight="-Infinity" prefHeight="181.0" prefWidth="249.0" type="CIRCLE">
                         <image>
-                            <Image url="@../../media/img/avatar.png"/>
+                            <Image url="@../../media/img/avatar.png" />
                         </image>
                         <effect>
-                            <DropShadow color="#00000026"/>
+                            <DropShadow color="#00000026" />
                         </effect>
                     </GNAvatarView>
+               <Label fx:id="lblUsername" styleClass="h4" />
 
-                    <ScrollPane fx:id="scroll" fitToWidth="true" styleClass="scroll"
-                                stylesheets="@../../theme/css/custom-scroll.css">
+                    <ScrollPane fx:id="scroll" fitToWidth="true" styleClass="scroll" stylesheets="@../../theme/css/custom-scroll.css">
                         <content>
                             <VBox fx:id="views" styleClass="drawer-content">
                                 <children>
-                                    <Button fx:id="home" alignment="BASELINE_LEFT" graphicTextGap="20.0"
-                                            mnemonicParsing="false" onMouseClicked="#dashboard" prefHeight="50.0"
-                                            prefWidth="271.0" styleClass="drawer-item" text="Dashboard">
+                                    <Button fx:id="home" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onMouseClicked="#dashboard" prefHeight="50.0" prefWidth="271.0" styleClass="drawer-item" text="Dashboard">
                                         <graphic>
-                                            <SVGPath
-                                                    content="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
-                                                    mouseTransparent="true" styleClass="icon"/>
+                                            <SVGPath content="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" mouseTransparent="true" />
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="profile" alignment="BASELINE_LEFT" graphicTextGap="20.0"
-                                            prefHeight="50.0" prefWidth="596.0" onMouseClicked="#profile"
-                                            styleClass="drawer-item" text="Profile">
+                                    <Button fx:id="profile" alignment="BASELINE_LEFT" graphicTextGap="20.0" onMouseClicked="#profile" prefHeight="50.0" prefWidth="596.0" styleClass="drawer-item" text="Profile">
                                         <graphic>
-                                            <SVGPath
-                                                    content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
-                                                    styleClass="icon"/>
+                                            <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
                                         </graphic>
                                     </Button>
                                 </children>
                             </VBox>
                         </content>
                         <VBox.margin>
-                            <Insets top="10.0"/>
+                            <Insets top="10.0" />
                         </VBox.margin>
                     </ScrollPane>
                     <padding>
-                        <Insets top="10.0"/>
+                        <Insets top="10.0" />
                     </padding>
                     <styleClass>
-                        <String fx:value="border"/>
-                        <String fx:value="border-r-1"/>
-                        <String fx:value="drawer"/>
+                        <String fx:value="border" />
+                        <String fx:value="border-r-1" />
+                        <String fx:value="drawer" />
                     </styleClass>
                 </VBox>
-                <VBox fx:id="content" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0"
-                      styleClass="drawer" HBox.hgrow="ALWAYS">
+                <VBox fx:id="content" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" styleClass="drawer" HBox.hgrow="ALWAYS">
                     <children>
                         <VBox>
                             <children>
-                                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="904.0"
-                                      style="-fx-border-width: 0 0 1 0;" styleClass="border">
+                                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="904.0" style="-fx-border-width: 0 0 1 0;" styleClass="border">
                                     <children>
                                         <Label fx:id="title" styleClass="h4" text="Dashboard" textFill="#0000008c">
                                             <font>
-                                                <Font size="17.0"/>
+                                                <Font size="17.0" />
                                             </font>
                                         </Label>
-                                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0"
-                                              HBox.hgrow="ALWAYS">
+                                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                                             <children>
-                                                <JFXBadge fx:id="tableDatainfo" layoutX="732.0" layoutY="12.0"
-                                                          position="TOP_RIGHT" prefHeight="44.0" prefWidth="35.0"
-                                                          text="32" visible="false">
+                                                <JFXBadge fx:id="tableDatainfo" layoutX="732.0" layoutY="12.0" position="TOP_RIGHT" prefHeight="44.0" prefWidth="35.0" text="32" visible="false">
                                                     <styleClass>
-                                                        <String fx:value="icon"/>
-                                                        <String fx:value="icon-danger"/>
+                                                        <String fx:value="icon" />
+                                                        <String fx:value="icon-danger" />
                                                     </styleClass>
                                                     <control>
-                                                        <StackPane prefHeight="32.0" prefWidth="43.0"
-                                                                   style="-fx-padding: 10;"
-                                                                   styleClass="icon-notification">
+                                                        <StackPane prefHeight="32.0" prefWidth="43.0" style="-fx-padding: 10;" styleClass="icon-notification">
                                                         </StackPane>
                                                     </control>
                                                 </JFXBadge>
                                             </children>
                                             <HBox.margin>
-                                                <Insets top="2.0"/>
+                                                <Insets top="2.0" />
                                             </HBox.margin>
                                         </HBox>
                                     </children>
+                                    <padding>
+                                        <Insets left="20.0" />
+                                    </padding>
                                 </HBox>
                             </children>
                         </VBox>
                         <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                             <children>
-                                <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0"
-                                            prefWidth="200.0" StackPane.alignment="TOP_LEFT">
+                                <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
                                     <content>
-                                        <fx:include source="../profile/profile.fxml"/>
+                                        <fx:include source="../profile/profile.fxml" />
                                     </content>
                                 </ScrollPane>
                             </children>
@@ -120,19 +109,19 @@
                 </VBox>
             </children>
             <styleClass>
-                <String fx:value="border-top-1"/>
-                <String fx:value="border"/>
+                <String fx:value="border-top-1" />
+                <String fx:value="border" />
             </styleClass>
         </HBox>
     </children>
     <stylesheets>
-        <URL value="@../../theme/css/material-color.css"/>
-        <URL value="@../../theme/css/skeleton.css"/>
-        <URL value="@../../theme/css/light.css"/>
-        <URL value="@../../theme/css/bootstrap.css"/>
-        <URL value="@../../theme/css/shape.css"/>
-        <URL value="@../../theme/css/typographic.css"/>
-        <URL value="@../../theme/css/helpers.css"/>
-        <URL value="@../../theme/css/master.css"/>
+        <URL value="@../../theme/css/material-color.css" />
+        <URL value="@../../theme/css/skeleton.css" />
+        <URL value="@../../theme/css/light.css" />
+        <URL value="@../../theme/css/bootstrap.css" />
+        <URL value="@../../theme/css/shape.css" />
+        <URL value="@../../theme/css/typographic.css" />
+        <URL value="@../../theme/css/helpers.css" />
+        <URL value="@../../theme/css/master.css" />
     </stylesheets>
 </StackPane>

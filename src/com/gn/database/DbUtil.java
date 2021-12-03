@@ -1,6 +1,5 @@
 package com.gn.database;
 
-import com.gn.model.Member;
 import com.gn.model.TableData;
 import com.gn.model.Transaction;
 
@@ -14,14 +13,24 @@ public class DbUtil {
     /**
      * Đối tượng JDBCController
      */
-    private JdbcController controller = new JdbcController();
+    private final JdbcController controller = new JdbcController();
     /**
      * Đối tượng dùng để kết nối với database
      */
-    private Connection connection;
+    private final Connection connection;
 
     public DbUtil() {
         connection = controller.ConnectionData();
+    }
+
+    public static void main(String[] args) throws SQLException {
+        DbUtil dbUtil = new DbUtil();
+//        List<Transaction> transactions = dbUtil.getDataTransaction();
+//        System.out.println(transactions.get(0).toString());
+        Transaction transaction = new Transaction(6, 1, 2, "LMHT", new Date(), 1000000000, "chi", "noi dung giao dich", 2);
+//        dbUtil.updateTransaction(transaction);
+//        dbUtil.deleteTransaction(2);
+        System.out.println(dbUtil.checkAccount("sonnv123", "123456"));
     }
 
     public List<Transaction> getDataTransaction() {
@@ -31,17 +40,7 @@ public class DbUtil {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                transactions.add(new Transaction(
-                        resultSet.getInt("transaction_id"),
-                        resultSet.getInt("member_id"),
-                        resultSet.getInt("partner_id"),
-                        resultSet.getString("project_name"),
-                        resultSet.getDate("start_time"),
-                        resultSet.getLong("total_money"),
-                        resultSet.getString("action"),
-                        resultSet.getString("content"),
-                        resultSet.getInt("status")
-                ));
+                transactions.add(new Transaction(resultSet.getInt("transaction_id"), resultSet.getInt("member_id"), resultSet.getInt("partner_id"), resultSet.getString("project_name"), resultSet.getDate("start_time"), resultSet.getLong("total_money"), resultSet.getString("action"), resultSet.getString("content"), resultSet.getInt("status")));
             }
             connection.close();
         } catch (Exception e) {
@@ -54,27 +53,13 @@ public class DbUtil {
     public List<TableData> getDataTable() {
         List<TableData> data = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" +
-                    "FROM transaction t, memmber m, partner p, account a\n" +
-                    "where t.member_id = m.member_id and t.partner_id = p.parter_id and a.account_id = m.account_id";
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t, memmber m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.parter_id and a.account_id = m.account_id";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
             int index = 0;
             while (rs.next()) {
                 index++;
-                data.add(new TableData(
-                        rs.getInt("transaction_id"),
-                        index,
-                        rs.getString("username"),
-                        rs.getString("fullname"),
-                        rs.getString("project_name"),
-                        rs.getString("name"),
-                        rs.getLong("total_money"),
-                        rs.getDate("start_time"),
-                        rs.getString("action"),
-                        rs.getString("content"),
-                        rs.getInt("status")
-                ));
+                data.add(new TableData(rs.getInt("transaction_id"), index, rs.getString("username"), rs.getString("fullname"), rs.getString("project_name"), rs.getString("name"), rs.getLong("total_money"), rs.getDate("start_time"), rs.getString("action"), rs.getString("content"), rs.getInt("status")));
             }
             return data;
         } catch (Exception e) {
@@ -85,9 +70,7 @@ public class DbUtil {
 
     public void addTransaction(Transaction transaction) {
         try {
-            String sqlQuery = "INSERT INTO `csms`.`transaction` " +
-                    "(`member_id`, `partner_id`, `project_name`, `start_time`, " +
-                    "`total_money`, `action`, `content`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            String sqlQuery = "INSERT INTO `csms`.`transaction` " + "(`member_id`, `partner_id`, `project_name`, `start_time`, " + "`total_money`, `action`, `content`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             // fill data
             stmt.setInt(1, transaction.getMemberId());
@@ -108,9 +91,7 @@ public class DbUtil {
 
     public void updateTransaction(Transaction transaction) {
         try {
-            String sqlQuery = "UPDATE `csms`.`transaction` SET " +
-                    "`member_id` = ?, `partner_id` = ?, `project_name` = ?, `start_time` = ?, " +
-                    "`total_money` = ?, `action` = ?, `content` = ?, `status` = ? WHERE (`transaction_id` = ?);";
+            String sqlQuery = "UPDATE `csms`.`transaction` SET " + "`member_id` = ?, `partner_id` = ?, `project_name` = ?, `start_time` = ?, " + "`total_money` = ?, `action` = ?, `content` = ?, `status` = ? WHERE (`transaction_id` = ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             // fill data
             stmt.setInt(1, transaction.getMemberId());
@@ -144,6 +125,9 @@ public class DbUtil {
     }
 
     public boolean checkAccount(String username, String password) {
+//        TODO:   - Nếu validate thành công thì trả về Member với đầy đủ thông tin. Nếu fail thì trả về Member có memberId = 0
+//                - Dùng hàm khởi tạo mặc định Member() để memberId = 0, em đã viết sẵn rồi nhé
+
         try {
             String sqlQuery = "SELECT * FROM account WHERE username = ? and password = ?";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
@@ -156,15 +140,5 @@ public class DbUtil {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static void main(String[] args) throws SQLException {
-        DbUtil dbUtil = new DbUtil();
-//        List<Transaction> transactions = dbUtil.getDataTransaction();
-//        System.out.println(transactions.get(0).toString());
-        Transaction transaction = new Transaction(6,1, 2, "LMHT", new Date(), 1000000000, "chi", "noi dung giao dich", 2);
-//        dbUtil.updateTransaction(transaction);
-//        dbUtil.deleteTransaction(2);
-        System.out.println(dbUtil.checkAccount("sonnv123", "123456"));
     }
 }

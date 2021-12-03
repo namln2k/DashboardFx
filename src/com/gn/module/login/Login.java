@@ -16,15 +16,12 @@
  */
 package com.gn.module.login;
 
-import animatefx.animation.Flash;
 import animatefx.animation.Pulse;
-import animatefx.animation.SlideInLeft;
 import com.gn.App;
 import com.gn.GNAvatarView;
 import com.gn.database.DbUtil;
-import com.gn.global.Section;
-import com.gn.global.plugin.SectionManager;
 import com.gn.global.plugin.ViewManager;
+import com.gn.model.Account;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -112,6 +109,8 @@ public class Login implements Initializable {
         String password = this.password.getText();
         DbUtil dbUtil = new DbUtil();
         if (dbUtil.checkAccount(username, password)) {
+//          TODO: Set member information for app
+
             App.decorator.setContent(ViewManager.getInstance().get("main"));
         } else {
             lblError.setVisible(true);

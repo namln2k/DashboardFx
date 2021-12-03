@@ -62,10 +62,6 @@ public class TableData {
         this.index = index;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
     public String getUsername() {
         return username;
     }

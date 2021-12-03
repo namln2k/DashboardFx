@@ -43,25 +43,19 @@ import java.util.Arrays;
 class Dialog {
 
     private static Color color;
-    private static JFXDialog dialog = new JFXDialog();
+    private static final JFXDialog dialog = new JFXDialog();
 
     private static final EventHandler<MouseEvent> close = event -> dialog.close();
 
-    public enum Type { INFO, WARNING, ERROR, SUCCESS }
-    public enum ButtonType { OK, CANCEL }
-
     static void createAlert(Type type, String title, String message) {
-        createLayout(createHeader(type), createContent(title, message), createActions(type, new EventHandler[]{
-           close
-        }));
+        createLayout(createHeader(type), createContent(title, message), createActions(type, new EventHandler[]{close}));
     }
 
     static void createAlert(Type type, String title, String message, EventHandler<MouseEvent>... confirm) {
         createLayout(createHeader(type), createContent(title, message), createActions(type, confirm));
     }
 
-
-    private static void createLayout(VBox header, VBox content, HBox actions){
+    private static void createLayout(VBox header, VBox content, HBox actions) {
         StackPane root = new StackPane();
         root.setPadding(new Insets(10));
 
@@ -74,7 +68,7 @@ class Dialog {
         show(root);
     }
 
-    private static VBox createHeader(Type type){
+    private static VBox createHeader(Type type) {
         VBox header = new VBox();
 
         header.setMinHeight(120);
@@ -82,7 +76,7 @@ class Dialog {
 
         ImageView icon = null;
 
-        switch (type){
+        switch (type) {
             case INFO:
                 color = Color.web("#33B5E5");
                 icon = new ImageView(new Image("/com/gn/module/media/img/info_48dp.png"));
@@ -100,7 +94,7 @@ class Dialog {
                 icon = new ImageView(new Image("/com/gn/module/media/img/done_48dp.png"));
                 break;
         }
-        header.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10, 0, 0, 0,false), Insets.EMPTY)));
+        header.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10, 0, 0, 0, false), Insets.EMPTY)));
 
         icon.setPreserveRatio(true);
         icon.setSmooth(true);
@@ -111,12 +105,12 @@ class Dialog {
         return header;
     }
 
-    private static VBox  createContent(String title, String message){
+    private static VBox createContent(String title, String message) {
         VBox container = new VBox();
         container.setAlignment(Pos.TOP_CENTER);
         container.setSpacing(20D);
 
-        VBox.setMargin(container, new Insets(10,0,0,0));
+        VBox.setMargin(container, new Insets(10, 0, 0, 0));
 
         Label lblTitle = new Label(title);
         lblTitle.getStyleClass().add("h2");
@@ -133,7 +127,7 @@ class Dialog {
         return container;
     }
 
-    private static HBox createActions(Type type, EventHandler<MouseEvent>[] event){
+    private static HBox createActions(Type type, EventHandler<MouseEvent>[] event) {
         HBox actions = new HBox();
         actions.setMinSize(480, 73);
         actions.setAlignment(Pos.CENTER);
@@ -148,20 +142,20 @@ class Dialog {
 //                            createButton(ButtonType.CANCEL, "Cancel", close));
 //                break;
             default:
-                actions.getChildren().add(createButton(ButtonType.OK,"OK", list.get(0)));
+                actions.getChildren().add(createButton(ButtonType.OK, "OK", list.get(0)));
                 break;
         }
         return actions;
     }
 
-    private static Button createButton(ButtonType type, String text, EventHandler<MouseEvent> eventEventHandler){
+    private static Button createButton(ButtonType type, String text, EventHandler<MouseEvent> eventEventHandler) {
         Button button = new Button(text);
         button.setCursor(Cursor.HAND);
         button.setOnMouseReleased(eventEventHandler);
         button.setPrefWidth(100);
         button.addEventHandler(MouseEvent.MOUSE_RELEASED, close);
 
-        switch (type){
+        switch (type) {
             case CANCEL:
                 button.setDefaultButton(true);
                 break;
@@ -172,7 +166,7 @@ class Dialog {
         return button;
     }
 
-    private static void show(Region region){
+    private static void show(Region region) {
 
         dialog.setDialogContainer(App.getDecorator().getBackground());
         dialog.setContent(region);
@@ -186,4 +180,8 @@ class Dialog {
             }
         }).start());
     }
+
+    public enum Type {INFO, WARNING, ERROR, SUCCESS}
+
+    public enum ButtonType {OK, CANCEL}
 }

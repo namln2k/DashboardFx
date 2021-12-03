@@ -16,15 +16,17 @@
  */
 package com.gn.module.dialog;
 
-import com.gn.global.*;
+import com.gn.global.Formatter;
 import com.gn.model.TableData;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 /**
@@ -34,7 +36,7 @@ import java.util.ResourceBundle;
  */
 public class Dialog implements Initializable {
 
-    private static TableData target = new TableData();
+    private static TableData target;
     @FXML
     private TextField txfProject;
     @FXML
@@ -67,30 +69,55 @@ public class Dialog implements Initializable {
     @FXML
     private void closeDialog() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
-
         stage.close();
     }
 
     private void setValues(TableData data) {
-        txfProject.setText(target.getProject());
-        if (target.getMoney() != 0) {
-            txfMoney.setText(String.valueOf(target.getMoney()));
+        txfProject.setText(data.getProject());
+        if (data.getMoney() != 0) {
+            txfMoney.setText(String.valueOf(data.getMoney()));
         }
-        dpkTime.setValue(Formatter.toLocalDate(target.getTime()));
-        com.gn.global.ComboBox.setValue(cbxPartner, target.getPartner());
-        txfAction.setText(target.getAction());
-        txaContent.setText(target.getContent());
+        dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
+        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
+        txfAction.setText(data.getAction());
+        txaContent.setText(data.getContent());
+        txfStatus.setText(data.getStatus());
+    }
+
+    private void getValues() {
+        String project = this.txfProject.getText();
+        String partner = this.cbxPartner.getValue();
+        long money = Long.valueOf(this.txfMoney.getText());
+        Date time = Date.from(this.dpkTime.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        String action = this.txfAction.getText();
+        String status = this.txfStatus.getText();
+        String content = this.txaContent.getText();
+
+//        TODO: Thêm các thuộc tính khác để khởi tạo Transaction để thực hiện truy vấn
+
+        if (target.getIndex() == 0) {
+//            TODO: Đây là trường hợp thêm Transaction mới
+
+        }
+        else {
+//            TODO: Đây là trường hợp update Transaction
+
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (target.getIndex() == 0) {
+            target = new TableData();
             lblTitle.setText("Thêm giao dịch");
             btnProcess.setText("Thêm");
         } else {
             lblTitle.setText("Thông tin giao dịch");
             btnProcess.setText("Cập nhật");
         }
+
+        Platform.runLater(() -> txfProject.requestFocus());
+
         setValues(target);
     }
 
@@ -101,6 +128,6 @@ public class Dialog implements Initializable {
 
     @FXML
     private void processDialog() {
-//        setValues(target);
+        getValues();
     }
 }

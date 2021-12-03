@@ -36,9 +36,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -48,6 +46,7 @@ import java.util.ResourceBundle;
  */
 public class Dashboard implements Initializable {
 
+    private final DbUtil dbUtil = new DbUtil();
     ObservableList<TableData> tableData = FXCollections.observableArrayList();
     @FXML
     private TableView<TableData> tableView;
@@ -71,7 +70,6 @@ public class Dashboard implements Initializable {
     private TableColumn<TableData, String> colContent;
     @FXML
     private TableColumn<TableData, String> colStatus;
-    private final DbUtil dbUtil = new DbUtil();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

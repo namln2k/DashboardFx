@@ -27,7 +27,7 @@ public class User {
     private String email;
     private String password;
 
-    public User(){
+    public User() {
 
     }
 
@@ -78,8 +78,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User[userName = " +userName+ ", " +
-                "fullName = " +fullName +", " +
-                "email = " +email+ ", password = " + password +"]";
+        return "User[userName = " + userName + ", " + "fullName = " + fullName + ", " + "email = " + email + ", password = " + password + "]";
     }
 }

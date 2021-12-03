@@ -1,22 +1,18 @@
 
-.text-field
-{
-  -fx-background-color : transparent;
-  -fx-border-width : 0px;
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px;
 }
 
-HBox, .text-field
-{
-  -fx-border-color : transparent;
+HBox, .text-field {
+    -fx-border-color: transparent;
 }
 
-.login
-{
-   -fx-background-color : linear-gradient(to left, -mint, -success);
+.login {
+    -fx-background-color: linear-gradient(to left, -mint, -success);
 }
 
-.login:focused, .login:hover
-{
-  -fx-background-color : linear-gradient(to left, -success, -mint);
+.login:focused, .login:hover {
+    -fx-background-color: linear-gradient(to left, -success, -mint);
 
 }

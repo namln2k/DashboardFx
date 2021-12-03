@@ -13,6 +13,7 @@ public class Member {
     private String taxCode;
 
     public Member() {
+        this.memberId = 0;
     }
 
     public Member(int memberId, int accountId, String fullName, String gender, Date birthday, String phone, String address, String taxCode) {

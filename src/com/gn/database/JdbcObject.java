@@ -4,35 +4,36 @@ public class JdbcObject {
     /**
      * IP của database
      */
-    private String sServerIP;
+    private final String sServerIP;
     /**
      * Username login của database
      */
-    private String sUserId;
+    private final String sUserId;
     /**
      * Password login của database
      */
-    private String sPwd;
+    private final String sPwd;
     /**
      * Tên của database
      */
-    private String sDatabase;
+    private final String sDatabase;
     /**
      * Giá trị mặc định "net.sourceforge.jtds.jdbc.Driver"
      */
-    private String sClass;
+    private final String sClass;
     /**
      * Cổng kết nối tới database
      */
-    private String sPort;
+    private final String sPort;
 
     /**
      * Phương thức khởi tạo đối tượng chứa thông tin kết nối tới database
+     *
      * @param sServerIp IP của database
-     * @param sUserId Username login của database
-     * @param sPwd Password login của database
+     * @param sUserId   Username login của database
+     * @param sPwd      Password login của database
      * @param sDatabase Tên của database
-     * @param sPort Cổng kết nối tới database
+     * @param sPort     Cổng kết nối tới database
      */
     public JdbcObject(String sServerIp, String sUserId, String sPwd, String sDatabase, String sPort) {
         this.sServerIP = sServerIp;

@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class Formatter {
     public static LocalDate toLocalDate(Date date) {
-        if (date == null)
-            return null;
+        if (date == null) return null;
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int year = cal.get(Calendar.YEAR);

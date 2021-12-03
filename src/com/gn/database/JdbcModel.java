@@ -12,17 +12,10 @@ public class JdbcModel {
     public Connection getConnectionOf() {
         Connection objConn = null;
         String sConnURL;
-        JdbcObject objEntity = new JdbcObject(
-                DatabaseConfig.SERVER_IP,
-                DatabaseConfig.SERVER_USER_NAME,
-                DatabaseConfig.SERVER_PWD,
-                DatabaseConfig.SERVER_DATABASE_NAME,
-                DatabaseConfig.SERVER_PORT);
+        JdbcObject objEntity = new JdbcObject(DatabaseConfig.SERVER_IP, DatabaseConfig.SERVER_USER_NAME, DatabaseConfig.SERVER_PWD, DatabaseConfig.SERVER_DATABASE_NAME, DatabaseConfig.SERVER_PORT);
         try {
             Class.forName(objEntity.getsClass());
-            sConnURL = "jdbc:mysql://"
-                    + objEntity.getsServerIP() + ":" + objEntity.getsPort()
-                    + "/" + objEntity.getsDatabase();
+            sConnURL = "jdbc:mysql://" + objEntity.getsServerIP() + ":" + objEntity.getsPort() + "/" + objEntity.getsDatabase();
             objConn = DriverManager.getConnection(sConnURL, objEntity.getsUserId(), objEntity.getsPwd());
         } catch (Exception se) {
             se.printStackTrace();
