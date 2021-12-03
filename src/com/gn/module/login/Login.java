@@ -22,6 +22,7 @@ import com.gn.GNAvatarView;
 import com.gn.database.DbUtil;
 import com.gn.global.plugin.ViewManager;
 import com.gn.model.Member;
+import com.gn.module.main.Main;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

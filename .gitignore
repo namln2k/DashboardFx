@@ -1,8 +1,5 @@
 ./gitignore
 .idea/**
 /out/**
-/user/**
-annotation.txt
-scenicView.properties
-dashboard.properties
 DashboardFx.iml
+/src/com/gn/database/DatabaseConfig.java

@@ -49,9 +49,6 @@ public class Main implements Initializable {
 
         // Set main scene to dashboard
         body.setContent(ViewManager.getInstance().get("dashboard"));
-
-        // Set username
-        lblUsername.setText(App.member.getFullName());
     }
 
     @FXML

@@ -508,7 +508,6 @@
 }
 
 
-/* TODO: try to scope the menu-item style to the contextmenu */
 .menu-item {
     -fx-background-color: transparent;
     -fx-padding: 0.666666em 1.333332em 0.666666em 1.333332em; /*8 16 8 16 */

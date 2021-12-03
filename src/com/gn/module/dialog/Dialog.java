@@ -19,9 +19,10 @@ package com.gn.module.dialog;
 import com.gn.App;
 import com.gn.database.DbUtil;
 import com.gn.global.Formatter;
+import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.model.Transaction;
-import javafx.application.Platform;
+import com.gn.module.dashboard.Dashboard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -30,6 +31,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -51,7 +53,7 @@ public class Dialog implements Initializable {
     @FXML
     private TextField txfAction;
     @FXML
-    private TextField txfStatus;
+    private ComboBox<String> cbxStatus;
     @FXML
     private TextArea txaContent;
     @FXML
@@ -61,7 +63,7 @@ public class Dialog implements Initializable {
     @FXML
     private Label lblTitle;
 
-    private DbUtil dbUtil = new DbUtil();
+    private final DbUtil dbUtil = new DbUtil();
 
     public TableData getTarget() {
         return target;
@@ -86,38 +88,29 @@ public class Dialog implements Initializable {
         com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
         txfAction.setText(data.getAction());
         txaContent.setText(data.getContent());
-        txfStatus.setText(data.getStatus());
+        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
     }
 
-    private void getValues() {
+    private Transaction getValues() {
         String project = this.txfProject.getText();
         String partner = this.cbxPartner.getValue();
         long money = Long.valueOf(this.txfMoney.getText());
         Date time = Date.from(this.dpkTime.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         String action = this.txfAction.getText();
-        String status = this.txfStatus.getText();
         String content = this.txaContent.getText();
 
-        Transaction transaction = new Transaction(
-                App.member.getMemberId(),
-                1,
-                project,
-                time,
-                money,
-                action,
-                content,
-                1
-        );
-//        TODO: Thêm các thuộc tính khác để khởi tạo Transaction để thực hiện truy vấn
+        Transaction transaction = new Transaction(App.member.getMemberId(), 1, project, time, money, action, content, 1);
 
-        if (target.getIndex() == 0) {
-//            TODO: Đây là trường hợp thêm Transaction mới
-            dbUtil.addTransaction(transaction);
+        return transaction;
+    }
+
+    private void prepareComboBoxes() {
+        List<Partner> partnerList = dbUtil.getListPartner();
+        for (Partner partner : partnerList) {
+            cbxPartner.getItems().add(partner.getName());
         }
-        else {
-//            TODO: Đây là trường hợp update Transaction
-            dbUtil.updateTransaction(transaction);
-        }
+
+        cbxStatus.getItems().addAll("Pending", "Completed");
     }
 
     @Override
@@ -131,7 +124,7 @@ public class Dialog implements Initializable {
             btnProcess.setText("Cập nhật");
         }
 
-        Platform.runLater(() -> txfProject.requestFocus());
+        prepareComboBoxes();
 
         setValues(target);
     }
@@ -143,6 +136,14 @@ public class Dialog implements Initializable {
 
     @FXML
     private void processDialog() {
-        getValues();
+        Transaction transaction = getValues();
+
+        if (target.getIndex() == 0) {
+            dbUtil.addTransaction(transaction);
+        } else {
+            dbUtil.updateTransaction(transaction);
+        }
+
+        closeDialog();
     }
 }

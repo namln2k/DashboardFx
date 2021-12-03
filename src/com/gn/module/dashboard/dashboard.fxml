@@ -32,7 +32,7 @@
                                 pickOnBounds="false" prefHeight="65.0" prefWidth="200.0"
                                 style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success"
                                 text="Thêm giao dịch"/>
-                        <Button mnemonicParsing="false" onAction="#deleteRow" pickOnBounds="false" prefHeight="50.0"
+                        <Button mnemonicParsing="false" onAction="#deleteTransaction" pickOnBounds="false" prefHeight="50.0"
                                 prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
                                 styleClass="btn-danger" text="Xóa giao dịch"/>
                     </children>

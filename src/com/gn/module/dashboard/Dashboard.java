@@ -84,7 +84,7 @@ public class Dashboard implements Initializable {
         colContent.setCellValueFactory(new PropertyValueFactory<>("content"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        updateTableData();
+        updateView();
 
         tableView.setRowFactory(tv -> {
             TableRow<TableData> row = new TableRow<>();
@@ -103,7 +103,7 @@ public class Dashboard implements Initializable {
         });
     }
 
-    public void updateTableData() {
+    public void updateView() {
         ObservableList<TableData> tableData = FXCollections.observableArrayList();
         tableData.addAll(dbUtil.getDataTable());
 
@@ -111,7 +111,12 @@ public class Dashboard implements Initializable {
     }
 
     @FXML
-    private void deleteRow(ActionEvent event) {
+    private void deleteTransaction(ActionEvent event) {
+        TableData selectedRow = tableView.getSelectionModel().getSelectedItem();
+
+        dbUtil.deleteTransaction(selectedRow.getTransactionId());
+
+        updateView();
     }
 
     public void openDialog() throws IOException {
@@ -124,6 +129,10 @@ public class Dashboard implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
+
+        if (!stage.isShowing()) {
+            updateView();
+        }
     }
 
     @FXML
