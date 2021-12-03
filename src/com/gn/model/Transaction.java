@@ -1,5 +1,6 @@
 package com.gn.model;
 
+
 import java.util.Date;
 
 public class Transaction {
@@ -15,6 +16,17 @@ public class Transaction {
 
     public Transaction(int transactionId, int memberId, int partnerId, String projectName, Date startTime, long totalMoney, String action, String content, int status) {
         this.transactionId = transactionId;
+        this.memberId = memberId;
+        this.partnerId = partnerId;
+        this.projectName = projectName;
+        this.startTime = startTime;
+        this.totalMoney = totalMoney;
+        this.action = action;
+        this.content = content;
+        this.status = status;
+    }
+
+    public Transaction(int memberId, int partnerId, String projectName, Date startTime, long totalMoney, String action, String content, int status) {
         this.memberId = memberId;
         this.partnerId = partnerId;
         this.projectName = projectName;
