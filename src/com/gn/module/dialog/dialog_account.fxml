@@ -1,64 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
-<?import java.net.*?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0"
-           prefWidth="642.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.gn.module.dialog.DialogAccount">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.dialog.DialogAccount">
     <children>
         <VBox prefHeight="542.0" prefWidth="842.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="68.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
                     <children>
-                        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="51.0" prefWidth="222.0"
-                               style="-fx-text-fill: -text-color; -fx-font-size: 24; -fx-font-weight: bold;">
+                        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="51.0" prefWidth="222.0" style="-fx-text-fill: -text-color; -fx-font-size: 24; -fx-font-weight: bold;">
                             <font>
-                                <Font size="8.0"/>
+                                <Font size="8.0" />
                             </font>
                         </Label>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="278.0" prefHeight="70.0" prefWidth="600.0">
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="278.0" prefHeight="70.0" prefWidth="600.0" spacing="15.0">
                     <children>
                         <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Username">
                             <font>
-                                <Font name="System Bold" size="20.0"/>
+                                <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="tfxUsername" prefHeight="50.0" prefWidth="248.0"/>
+                        <TextField fx:id="tfxUsername" prefHeight="50.0" prefWidth="248.0" />
+                  <SVGPath content="M16.971 0h-9.942l-7.029 7.029v9.941l7.029 7.03h9.941l7.03-7.029v-9.942l-7.029-7.029zm-1.402 16.945l-3.554-3.521-3.518 3.568-1.418-1.418 3.507-3.566-3.586-3.472 1.418-1.417 3.581 3.458 3.539-3.583 1.431 1.431-3.535 3.568 3.566 3.522-1.431 1.43z" visible="false" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="801.0">
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="801.0" spacing="15.0">
                     <children>
                         <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Password">
                             <font>
-                                <Font name="System Bold" size="20.0"/>
+                                <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txfPassword" prefHeight="50.0" prefWidth="248.0"/>
+                        <TextField fx:id="txfPassword" prefHeight="50.0" prefWidth="248.0" />
+                  <SVGPath fx:id="lblErrorPassword" content="M16.971 0h-9.942l-7.029 7.029v9.941l7.029 7.03h9.941l7.03-7.029v-9.942l-7.029-7.029zm-1.402 16.945l-3.554-3.521-3.518 3.568-1.418-1.418 3.507-3.566-3.586-3.472 1.418-1.417 3.581 3.458 3.539-3.583 1.431 1.431-3.535 3.568 3.566 3.522-1.431 1.43z" visible="false" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="801.0">
+                <HBox alignment="CENTER" prefHeight="70.0" prefWidth="801.0" spacing="15.0">
                     <children>
                         <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Confirm">
                             <font>
-                                <Font name="System Bold" size="20.0"/>
+                                <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="tfxConfirm" prefHeight="50.0" prefWidth="248.0"/>
+                        <TextField fx:id="tfxConfirm" prefHeight="50.0" prefWidth="248.0" />
+                  <SVGPath fx:id="lblErrorConfirm" content="M16.971 0h-9.942l-7.029 7.029v9.941l7.029 7.03h9.941l7.03-7.029v-9.942l-7.029-7.029zm-1.402 16.945l-3.554-3.521-3.518 3.568-1.418-1.418 3.507-3.566-3.586-3.472 1.418-1.417 3.581 3.458 3.539-3.583 1.431 1.431-3.535 3.568 3.566 3.522-1.431 1.43z" visible="false" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" prefHeight="133.0" prefWidth="900.0"
-                      spacing="100.0">
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" prefHeight="133.0" prefWidth="900.0" spacing="100.0">
                     <children>
-                        <Button fx:id="btnNext" mnemonicParsing="false" onAction="#nextDialog" pickOnBounds="false"
-                                prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-success" text="Tiếp tục"/>
-                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#closeDialog" pickOnBounds="false"
-                                prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-danger" text="Hủy"/>
+                        <Button fx:id="btnNext" mnemonicParsing="false" onAction="#nextDialog" pickOnBounds="false" prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" text="Tiếp tục" />
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#closeDialog" pickOnBounds="false" prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-danger" text="Hủy" />
                     </children>
                 </HBox>
             </children>
@@ -66,13 +67,13 @@
     </children>
 
     <stylesheets>
-        <URL value="@../../theme/css/material-color.css"/>
-        <URL value="@../../theme/css/skeleton.css"/>
-        <URL value="@../../theme/css/light.css"/>
-        <URL value="@../../theme/css/bootstrap.css"/>
-        <URL value="@../../theme/css/shape.css"/>
-        <URL value="@../../theme/css/typographic.css"/>
-        <URL value="@../../theme/css/helpers.css"/>
-        <URL value="@../../theme/css/master.css"/>
+        <URL value="@../../theme/css/material-color.css" />
+        <URL value="@../../theme/css/skeleton.css" />
+        <URL value="@../../theme/css/light.css" />
+        <URL value="@../../theme/css/bootstrap.css" />
+        <URL value="@../../theme/css/shape.css" />
+        <URL value="@../../theme/css/typographic.css" />
+        <URL value="@../../theme/css/helpers.css" />
+        <URL value="@../../theme/css/master.css" />
     </stylesheets>
 </StackPane>

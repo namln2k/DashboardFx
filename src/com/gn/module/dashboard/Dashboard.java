@@ -174,7 +174,6 @@ public class Dashboard implements Initializable {
         String partner = cbxPartner.getValue() == null ? "" : cbxPartner.getValue().toString();
         String project = txfProject.getText() == null ? "" : txfProject.getText();
 
-
         ObservableList<TableData> tableData = FXCollections.observableArrayList();
         tableData.addAll(dbUtil.searchTransaction(project, partner, username));
         tableView.setItems(tableData);
