@@ -47,7 +47,7 @@ import java.util.ResourceBundle;
 public class Dashboard implements Initializable {
 
     private final DbUtil dbUtil = new DbUtil();
-    ObservableList<TableData> tableData = FXCollections.observableArrayList();
+
     @FXML
     private TableView<TableData> tableView;
     @FXML
@@ -55,7 +55,7 @@ public class Dashboard implements Initializable {
     @FXML
     private TableColumn<TableData, String> colUsername;
     @FXML
-    private TableColumn<TableData, String> colFullname;
+    private TableColumn<TableData, String> colFullName;
     @FXML
     private TableColumn<TableData, String> colProject;
     @FXML
@@ -75,7 +75,7 @@ public class Dashboard implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         colIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
-        colFullname.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colProject.setCellValueFactory(new PropertyValueFactory<>("project"));
         colPartner.setCellValueFactory(new PropertyValueFactory<>("partner"));
         colMoney.setCellValueFactory(new PropertyValueFactory<>("money"));
