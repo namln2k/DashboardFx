@@ -87,7 +87,7 @@ public class DialogMember implements Initializable {
         txaIntro.setText(data.getIntro());
         txfEmail.setText(data.getEmail());
         txfTaxCode.setText(data.getTaxCode());
-        dpkBirthday.setValue(Formatter.toLocalDate(data.getBirthday()));
+        dpkBirthday.setValue(Formatter.dateToLocalDate(data.getBirthday()));
         txfLink.setText(data.getSite());
         txfPhone.setText(data.getPhone());
     }

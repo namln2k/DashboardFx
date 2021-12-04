@@ -17,6 +17,7 @@
 package com.gn.module.dashboard;
 
 import com.gn.database.DbUtil;
+import com.gn.global.Formatter;
 import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.module.dialog.DialogTransaction;
@@ -35,6 +36,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,8 +50,13 @@ import java.util.ResourceBundle;
 public class Dashboard implements Initializable {
 
     private final DbUtil dbUtil = new DbUtil();
+
     @FXML
     public Button btnReset;
+    @FXML
+    public DatePicker dpkStartTime;
+    @FXML
+    public DatePicker dpkEndTime;
     @FXML
     private TableView<TableData> tableView;
     @FXML
@@ -82,6 +89,7 @@ public class Dashboard implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Bind dữ liệu cho các cột
         colIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
@@ -97,6 +105,7 @@ public class Dashboard implements Initializable {
 
         prepareComboBoxes();
 
+        // Lắng nghe sự kiện double click vào 1 hàng nào đó, khi đó thì gọi hàm hiển thị dialog
         tableView.setRowFactory(tv -> {
             TableRow<TableData> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -104,6 +113,7 @@ public class Dashboard implements Initializable {
                     TableData rowData = row.getItem();
                     DialogTransaction.setTarget(rowData);
                     try {
+                        // Hiển thị dialog về thông tin giao dịch
                         openDialog();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -114,6 +124,9 @@ public class Dashboard implements Initializable {
         });
     }
 
+    /**
+     * Lấy data hiện tại trong database và cập nhật lại trên bảng
+     */
     public void updateView() {
         ObservableList<TableData> tableData = FXCollections.observableArrayList();
         tableData.addAll(dbUtil.getDataTable());
@@ -121,13 +134,18 @@ public class Dashboard implements Initializable {
         tableView.setItems(tableData);
     }
 
+    /**
+     * Load các options cho các combo box
+     */
     private void prepareComboBoxes() {
+        // Danh sách tên các Partner cho cbxPartner
         List<String> partners = new ArrayList<>();
         for (Partner partner : dbUtil.getListPartner()) {
             partners.add(partner.getName());
         }
         com.gn.global.ComboBox.prepareComboBox(cbxPartner, partners);
 
+        // Danh sách các username cho cbxUsername
         List<String> usernames = new ArrayList<>();
         for (String username : dbUtil.getListUsername()) {
             usernames.add(username);
@@ -135,18 +153,31 @@ public class Dashboard implements Initializable {
         com.gn.global.ComboBox.prepareComboBox(cbxUsername, usernames);
     }
 
+    /**
+     * Xóa transaction đang được chọn trên bảng
+     */
     @FXML
-    private void deleteTransaction(ActionEvent event) {
+    private void deleteTransaction() {
+        // Hiện alert và chờ confirm
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có chắc chắn muốn xóa?", ButtonType.YES, ButtonType.NO);
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
+            // Lấy id của transaction đang được chọn trên bảng
             TableData selectedRow = tableView.getSelectionModel().getSelectedItem();
-            dbUtil.deleteTransaction(selectedRow.getTransactionId());
+            int transactionId = selectedRow.getTransactionId();
+
+            // Thực hiện xóa transaction
+            dbUtil.deleteTransaction(transactionId);
+
             updateView();
         }
     }
 
+    /**
+     * Hiển thị dialog thông tin giao dịch
+     * @throws IOException
+     */
     public void openDialog() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/gn/module/dialog/dialog_transaction.fxml"));
         Parent parent = fxmlLoader.load();
@@ -158,31 +189,50 @@ public class Dashboard implements Initializable {
         stage.setScene(scene);
         stage.showAndWait();
 
+        // Cập nhật lại dữ liệu khi đóng dialog
         if (!stage.isShowing()) {
             updateView();
         }
     }
 
+    /**
+     * Hiển thị dialog thêm mới một giao dịch
+     * @throws IOException
+     */
     @FXML
-    void addTransaction(ActionEvent event) throws IOException {
+    void addTransaction() throws IOException {
         DialogTransaction.setTarget(new TableData());
         openDialog();
     }
 
+    /**
+     * Lọc thông tin hiển thị trên bảng theo username, partner name và project
+     */
     public void searchTransaction() {
-        String username = cbxUsername.getValue() == null ? "" : cbxUsername.getValue().toString() ;
+        // Lấy các trường cần lọc
+        String username = cbxUsername.getValue() == null ? "" : cbxUsername.getValue().toString();
         String partner = cbxPartner.getValue() == null ? "" : cbxPartner.getValue().toString();
         String project = txfProject.getText() == null ? "" : txfProject.getText();
+        Date startTime = dpkStartTime.getValue() == null ? null : Formatter.localDateToDate(dpkStartTime.getValue());
+        Date endTime = dpkEndTime.getValue() == null ? null : Formatter.localDateToDate(dpkEndTime.getValue());
 
+        // Lấy dữ liệu trong database phù hợp với các trường
         ObservableList<TableData> tableData = FXCollections.observableArrayList();
-        tableData.addAll(dbUtil.searchTransaction(project, partner, username));
+        tableData.addAll(dbUtil.searchTransaction(project, partner, username, startTime, endTime));
+
+        // Cập nhật dữ liệu hiển thị trên bảng
         tableView.setItems(tableData);
     }
 
-    public void resetTransaction(ActionEvent actionEvent) {
+    /**
+     * Reset các trường tìm kiếm và cập nhật lại dữ liệu hiển thị trên bảng
+     */
+    public void resetTransaction() {
         com.gn.global.ComboBox.setValue(cbxUsername, null);
         com.gn.global.ComboBox.setValue(cbxPartner, null);
         txfProject.setText("");
+        dpkStartTime.setValue(null);
+        dpkEndTime.setValue(null);
         updateView();
     }
 }

@@ -94,7 +94,7 @@ public class DialogTransaction implements Initializable {
         if (data.getMoney() != 0) {
             txfMoney.setText(String.valueOf(data.getMoney()));
         }
-        dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
+        dpkTime.setValue(Formatter.dateToLocalDate(data.getTime()));
         com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
         txfAction.setText(data.getAction());
         txaContent.setText(data.getContent());

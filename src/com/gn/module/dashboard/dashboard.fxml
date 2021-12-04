@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -69,28 +70,48 @@
                                 <Label style="-fx-font-weight: bold;" styleClass="h2" text="TÌM KIẾM GIAO DỊCH" />
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="196.0" prefWidth="960.0">
-                            <children>
-                                <HBox alignment="CENTER" prefWidth="320.0" spacing="10.0">
-                                    <children>
-                                        <Label styleClass="h4" text="Username" />
-                                        <ComboBox fx:id="cbxUsername" prefHeight="50.0" prefWidth="150.0" />
-                                    </children>
-                                </HBox>
-                                <HBox alignment="CENTER" layoutX="181.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
-                                    <children>
-                                        <Label styleClass="h4" text="Partner" />
-                                        <ComboBox fx:id="cbxPartner" prefHeight="50.0" prefWidth="150.0" />
-                                    </children>
-                                </HBox>
-                                <HBox alignment="CENTER" layoutX="266.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
-                                    <children>
-                                        <Label styleClass="h4" text="Project" />
-                                        <TextField fx:id="txfProject" prefHeight="50.0" prefWidth="150.0" />
-                                    </children>
-                                </HBox>
-                            </children>
+                  <VBox prefHeight="196.0" prefWidth="960.0">
+                     <children>
+                              <HBox alignment="CENTER" prefHeight="98.0" prefWidth="960.0">
+                                  <children>
+                                      <HBox alignment="CENTER" prefWidth="320.0" spacing="10.0">
+                                          <children>
+                                              <Label styleClass="h4" text="Username" />
+                                              <ComboBox fx:id="cbxUsername" prefHeight="50.0" prefWidth="150.0" />
+                                          </children>
+                                      </HBox>
+                                      <HBox alignment="CENTER" layoutX="181.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+                                          <children>
+                                              <Label styleClass="h4" text="Partner" />
+                                              <ComboBox fx:id="cbxPartner" prefHeight="50.0" prefWidth="150.0" />
+                                          </children>
+                                      </HBox>
+                                      <HBox alignment="CENTER" layoutX="266.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+                                          <children>
+                                              <Label styleClass="h4" text="Project" />
+                                              <TextField fx:id="txfProject" prefHeight="50.0" prefWidth="150.0" />
+                                          </children>
+                                      </HBox>
+                                  </children>
+                              </HBox>
+                        <HBox alignment="CENTER" prefHeight="98.0" prefWidth="960.0" spacing="50.0">
+                           <children>
+                              <HBox alignment="CENTER" prefWidth="320.0" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="h4" text="Start time" />
+                                    <DatePicker fx:id="dpkStartTime" prefHeight="50.0" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="h4" text="End time" />
+                                    <DatePicker fx:id="dpkEndTime" prefHeight="50.0" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                           </children>
                         </HBox>
+                     </children>
+                  </VBox>
                   <VBox alignment="CENTER" prefHeight="197.0" prefWidth="298.0" spacing="30.0">
                      <children>
                                 <Button alignment="CENTER" mnemonicParsing="false" onAction="#searchTransaction" pickOnBounds="false" prefHeight="44.0" prefWidth="150.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" text="Lọc" />

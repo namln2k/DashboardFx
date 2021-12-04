@@ -177,9 +177,9 @@ public class DbUtil {
         }
     }
 
-//    TODO: Thêm hàm getListAccount(): Lấy tất cả account
+//    TODO 0: Sửa hàm searchTransaction, tìm kiếm theo 2 trường startTime và endTime
 
-    public List<TableData> searchTransaction(String projectName, String partner, String username) {
+    public List<TableData> searchTransaction(String projectName, String partner, String username, Date startTime, Date endTime) {
         List<TableData> tableData = new ArrayList<>();
         try {
             String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"

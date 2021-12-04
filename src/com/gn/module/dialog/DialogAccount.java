@@ -23,7 +23,9 @@ import java.util.ResourceBundle;
 public class DialogAccount implements Initializable {
 
     private static Account target;
+
     private final DbUtil dbUtil = new DbUtil();
+
     @FXML
     public TextField tfxUsername;
     @FXML
