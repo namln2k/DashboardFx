@@ -69,8 +69,9 @@ public class App extends Application {
         // Load modules
         load("dashboard", "dashboard");
         load("main", "main");
-        load("profile", "profile");
-        load("Login", "login");
+        load("partner", "partner");
+        load("member", "member");
+        load("login", "login");
 
         // Wait for modules to load
         try {

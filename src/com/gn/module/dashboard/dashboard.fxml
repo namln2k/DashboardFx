@@ -1,162 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import java.net.*?>
-<StackPane prefHeight="994.0" prefWidth="1681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.gn.module.dashboard.Dashboard">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane prefHeight="994.0" prefWidth="1681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.dashboard.Dashboard">
     <children>
         <VBox prefWidth="1661.0" spacing="20.0">
             <StackPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </StackPane.margin>
             <children>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="1661.0"
-                      style="-fx-background-color: lightblue;">
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="1661.0" style="-fx-background-color: lightblue;">
                     <children>
-                        <Label prefHeight="51.0" prefWidth="309.0"
-                               style="-fx-text-fill: -text-color; -fx-font-size: 35; -fx-font-weight: bold;"
-                               text="QUẢN LÝ CHI TIÊU">
+                        <Label style="-fx-text-fill: -text-color; -fx-font-size: 35; -fx-font-weight: bold;" text="QUẢN LÝ GIAO DỊCH">
                             <font>
-                                <Font size="8.0"/>
+                                <Font size="8.0" />
                             </font>
                         </Label>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" prefHeight="92.0" prefWidth="550.0" spacing="50.0"
-                      style="-fx-border-color: tan;">
+                <HBox alignment="CENTER_RIGHT" prefHeight="92.0" prefWidth="550.0" spacing="50.0" style="-fx-border-color: tan;">
                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#addTransaction"
-                                pickOnBounds="false" prefHeight="65.0" prefWidth="200.0"
-                                style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success"
-                                text="Thêm giao dịch"/>
-                        <Button mnemonicParsing="false" onAction="#deleteTransaction" pickOnBounds="false" prefHeight="50.0"
-                                prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-danger" text="Xóa giao dịch"/>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#addTransaction" pickOnBounds="false" prefHeight="65.0" prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" text="Thêm giao dịch" />
+                        <Button mnemonicParsing="false" onAction="#deleteTransaction" pickOnBounds="false" prefHeight="50.0" prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-danger" text="Xóa giao dịch" />
                     </children>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <VBox.margin>
-                        <Insets left="1111.0"/>
+                        <Insets left="1111.0" />
                     </VBox.margin>
                     <padding>
-                        <Insets right="50.0"/>
+                        <Insets right="50.0" />
                     </padding>
                 </HBox>
                 <HBox prefHeight="395.0" prefWidth="1661.0">
                     <children>
                         <TableView fx:id="tableView" editable="true" prefHeight="415.0" prefWidth="1661.0">
                             <columns>
-                                <TableColumn fx:id="colIndex" editable="false" prefWidth="48.0" resizable="false"
-                                             text="STT"/>
-                                <TableColumn fx:id="colUsername" prefWidth="175.0" resizable="false" text="Username"/>
-                                <TableColumn fx:id="colFullname" prefWidth="221.0" resizable="false" text="Fullname"/>
-                                <TableColumn fx:id="colProject" minWidth="0.0" prefWidth="168.0" resizable="false"
-                                             text="Project"/>
-                                <TableColumn fx:id="colPartner" prefWidth="202.0" resizable="false" text="Partner"/>
-                                <TableColumn fx:id="colMoney" prefWidth="114.0" resizable="false" text="Money"/>
-                                <TableColumn fx:id="colTime" prefWidth="126.0" resizable="false" text="Time"/>
-                                <TableColumn fx:id="colAction" prefWidth="180.0" resizable="false" text="Action"/>
-                                <TableColumn fx:id="colContent" prefWidth="288.0" resizable="false" text="Content"/>
-                                <TableColumn fx:id="colStatus" prefWidth="224.0" resizable="false" text="Status"/>
+                                <TableColumn fx:id="colIndex" editable="false" prefWidth="50.0" resizable="false" text="STT" />
+                                <TableColumn fx:id="colUsername" prefWidth="150.0" text="Username" />
+                                <TableColumn fx:id="colFullName" prefWidth="180.0" text="Full name" />
+                                <TableColumn fx:id="colProject" minWidth="0.0" prefWidth="180.0" text="Project" />
+                                <TableColumn fx:id="colPartner" prefWidth="180.0" text="Partner" />
+                                <TableColumn fx:id="colMoney" prefWidth="130.0" text="Money" />
+                                <TableColumn fx:id="colTime" prefWidth="160.0" text="Time" />
+                                <TableColumn fx:id="colAction" prefWidth="150.0" text="Action" />
+                                <TableColumn fx:id="colContent" prefWidth="300.0" text="Content" />
+                                <TableColumn fx:id="colStatus" prefWidth="150.0" text="Status" />
                             </columns>
-                            <columnResizePolicy>
-                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-                            </columnResizePolicy>
                         </TableView>
                     </children>
                 </HBox>
-                <HBox prefHeight="198.0" prefWidth="1661.0" style="-fx-border-color: red;">
+                <HBox alignment="CENTER_LEFT" prefHeight="198.0" prefWidth="1661.0" style="-fx-border-color: red;">
                     <children>
-                        <HBox alignment="CENTER" prefHeight="204.0" prefWidth="400.0"
-                              style="-fx-background-color: pink;">
+                        <HBox alignment="CENTER" prefHeight="196.0" prefWidth="400.0" style="-fx-background-color: pink;">
                             <children>
-                                <Label style="-fx-font-weight: bold;" styleClass="h2" text="TÌM KIẾM GIAO DỊCH"/>
+                                <Label style="-fx-font-weight: bold;" styleClass="h2" text="TÌM KIẾM GIAO DỊCH" />
                             </children>
                         </HBox>
-                        <VBox prefHeight="204.0" prefWidth="983.0">
-                            <children>
-                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="801.0">
-                                    <children>
-                                        <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
-                                            <children>
-                                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4"
-                                                       text="Project">
-                                                    <font>
-                                                        <Font name="System Bold" size="20.0"/>
-                                                    </font>
-                                                </Label>
-                                                <TextField prefHeight="50.0" prefWidth="255.0"/>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0"
-                                              prefWidth="450.0">
-                                            <children>
-                                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4"
-                                                       text="Partner">
-                                                    <font>
-                                                        <Font name="System Bold" size="20.0"/>
-                                                    </font>
-                                                </Label>
-                                                <TextField prefHeight="50.0" prefWidth="255.0"/>
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </HBox>
-                                <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="100.0"
-                                      prefWidth="801.0">
-                                    <children>
-                                        <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
-                                            <children>
-                                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4"
-                                                       text="Project">
-                                                    <font>
-                                                        <Font name="System Bold" size="20.0"/>
-                                                    </font>
-                                                </Label>
-                                                <TextField prefHeight="50.0" prefWidth="255.0"/>
-                                            </children>
-                                        </HBox>
-                                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0"
-                                              prefWidth="450.0">
-                                            <children>
-                                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4"
-                                                       text="Partner">
-                                                    <font>
-                                                        <Font name="System Bold" size="20.0"/>
-                                                    </font>
-                                                </Label>
-                                                <TextField prefHeight="50.0" prefWidth="255.0"/>
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </VBox>
-                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="204.0" prefWidth="277.0">
-                            <children>
-                                <Button alignment="CENTER" mnemonicParsing="false" pickOnBounds="false"
-                                        prefHeight="44.0" prefWidth="150.0"
-                                        style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success"
-                                        text="Lọc"/>
-                            </children>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="196.0" prefWidth="960.0">
+                     <children>
+                        <HBox alignment="CENTER" prefWidth="320.0" spacing="10.0">
+                           <children>
+                              <Label styleClass="h4" text="Username" />
+                              <ComboBox prefHeight="50.0" prefWidth="150.0" />
+                           </children>
                         </HBox>
+                        <HBox alignment="CENTER" layoutX="181.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+                           <children>
+                              <Label styleClass="h4" text="Partner" />
+                              <ComboBox prefHeight="50.0" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="266.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
+                           <children>
+                              <Label styleClass="h4" text="Project" />
+                              <TextField prefHeight="50.0" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                        </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="196.0" prefWidth="301.0">
+                     <children>
+                                <Button alignment="CENTER" mnemonicParsing="false" pickOnBounds="false" prefHeight="44.0" prefWidth="150.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" text="Lọc">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets right="80.0" />
+                     </padding>
+                  </HBox>
                     </children>
                 </HBox>
             </children>
         </VBox>
     </children>
     <stylesheets>
-        <URL value="@../../theme/css/material-color.css"/>
-        <URL value="@../../theme/css/skeleton.css"/>
-        <URL value="@../../theme/css/light.css"/>
-        <URL value="@../../theme/css/bootstrap.css"/>
-        <URL value="@../../theme/css/shape.css"/>
-        <URL value="@../../theme/css/typographic.css"/>
-        <URL value="@../../theme/css/helpers.css"/>
-        <URL value="@../../theme/css/master.css"/>
+        <URL value="@../../theme/css/material-color.css" />
+        <URL value="@../../theme/css/skeleton.css" />
+        <URL value="@../../theme/css/light.css" />
+        <URL value="@../../theme/css/bootstrap.css" />
+        <URL value="@../../theme/css/shape.css" />
+        <URL value="@../../theme/css/typographic.css" />
+        <URL value="@../../theme/css/helpers.css" />
+        <URL value="@../../theme/css/master.css" />
     </stylesheets>
 </StackPane>

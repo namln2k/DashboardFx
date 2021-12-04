@@ -28,11 +28,9 @@ public class DbUtil {
     public static void main(String[] args) throws SQLException {
         DbUtil dbUtil = new DbUtil();
 //        List<Transaction> transactions = dbUtil.getDataTransaction();
-//        System.out.println(transactions.get(0).toString());
         Transaction transaction = new Transaction(6, 1, 2, "LMHT", new Date(), 1000000000, "chi", "noi dung giao dich", 2);
 //        dbUtil.updateTransaction(transaction);
 //        dbUtil.deleteTransaction(2);
-        System.out.println(dbUtil.getAccountMember("sonnv123", "123456"));
     }
 
     public List<Transaction> getDataTransaction() {

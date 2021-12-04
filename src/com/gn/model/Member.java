@@ -3,6 +3,12 @@ package com.gn.model;
 import java.util.Date;
 
 public class Member {
+//    TODO: Thêm các trường:
+//          - Career (Nghề nghiệp)
+//          - Email
+//          - Site (Kiểu github/tweet/...)
+//          - Brief (Sơ lược)
+//          - Intro (Giới thiệu)
     private int memberId;
     private int accountId;
     private String fullName;

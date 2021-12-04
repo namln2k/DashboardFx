@@ -18,14 +18,22 @@ package com.gn.module.main;
 
 import com.gn.App;
 import com.gn.global.plugin.ViewManager;
+import com.gn.module.partner.Partner;
+import com.gn.module.profile.Profile;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static jdk.nashorn.internal.objects.Global.load;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -41,27 +49,41 @@ public class Main implements Initializable {
     @FXML
     public Label lblUsername;
 
-    public static Main ctrl;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ctrl = this;
-
         // Set main scene to dashboard
         body.setContent(ViewManager.getInstance().get("dashboard"));
     }
 
     @FXML
     private void dashboard() {
-        // View dashboard
+        // View dashboard scene
         title.setText("Dashboard");
         body.setContent(ViewManager.getInstance().get("dashboard"));
     }
 
     @FXML
-    private void profile() {
-        // View profile
+    private void profile() throws IOException {
         title.setText("Profile");
-        body.setContent(ViewManager.getInstance().get("profile"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/gn/module/profile/profile.fxml"));
+        Node profileNode = loader.load();
+
+        Profile profileController = loader.getController();
+        profileController.setValues(App.member);
+        body.setContent(profileNode);
+    }
+
+    @FXML
+    private void partner() {
+        // View partner scene
+        title.setText("Partner");
+        body.setContent(ViewManager.getInstance().get("partner"));
+    }
+
+    @FXML
+    private void member() {
+        // View member scene
+        title.setText("Member");
+        body.setContent(ViewManager.getInstance().get("member"));
     }
 }
