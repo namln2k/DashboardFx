@@ -39,7 +39,7 @@ import java.util.ResourceBundle;
  * Create on  08/10/2018
  * Version 2.0
  */
-public class Dialog implements Initializable {
+public class DialogTransaction implements Initializable {
 
     private static TableData target;
     @FXML

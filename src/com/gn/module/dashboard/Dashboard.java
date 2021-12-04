@@ -18,7 +18,7 @@ package com.gn.module.dashboard;
 
 import com.gn.database.DbUtil;
 import com.gn.model.TableData;
-import com.gn.module.dialog.Dialog;
+import com.gn.module.dialog.DialogTransaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -91,7 +91,7 @@ public class Dashboard implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     TableData rowData = row.getItem();
-                    Dialog.setTarget(rowData);
+                    DialogTransaction.setTarget(rowData);
                     try {
                         openDialog();
                     } catch (IOException e) {
@@ -120,7 +120,7 @@ public class Dashboard implements Initializable {
     }
 
     public void openDialog() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/gn/module/dialog/dialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/gn/module/dialog/dialog_transaction.fxml"));
         Parent parent = fxmlLoader.load();
 
         Scene scene = new Scene(parent, 900, 600);
@@ -137,7 +137,7 @@ public class Dashboard implements Initializable {
 
     @FXML
     void addTransaction(ActionEvent event) throws IOException {
-        Dialog.setTarget(new TableData());
+        DialogTransaction.setTarget(new TableData());
         openDialog();
     }
 }

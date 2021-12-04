@@ -19,15 +19,21 @@ public class MemberController implements Initializable {
     private final DbUtil dbUtil = new DbUtil();
 
     @FXML
-    private TableView<com.gn.model.Member> tableView;
+    private TableView<Member> tableView;
     @FXML
-    private TableColumn<com.gn.model.Member, Integer> colIndex;
+    private TableColumn<Member, Integer> colIndex;
     @FXML
-    private TableColumn<com.gn.model.Member, String> colName;
+    private TableColumn<Member, String> colName;
     @FXML
-    private TableColumn<com.gn.model.Member, String> colPhoneNumber;
+    private TableColumn<Member, String> colPhoneNumber;
     @FXML
-    private TableColumn<com.gn.model.Member, String> colAddress;
+    private TableColumn<Member, String> colAddress;
+    @FXML
+    private TableColumn<Member, String> colEmail;
+    @FXML
+    private TableColumn<Member, String> colCareer;
+    @FXML
+    private TableColumn<Member, String> colGender;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +41,9 @@ public class MemberController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colCareer.setCellValueFactory(new PropertyValueFactory<>("career"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
 
         updateView();
 

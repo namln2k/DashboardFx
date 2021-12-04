@@ -186,8 +186,11 @@ public class DbUtil {
             String sqlQuery = "SELECT * FROM partner";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sqlQuery);
+            int index = 0;
             while (rs.next()) {
+                index++;
                 partners.add(new Partner(
+                        index,
                         rs.getInt("partner_id"),
                         rs.getString("name"),
                         rs.getString("phone_number"),
@@ -284,7 +287,7 @@ public class DbUtil {
 
     public void deletePartner(int partnerId) {
         try {
-            String sqlQuery = "DELETE FROM `csms`.`partner` WHERE (`partnerId` = ?);";
+            String sqlQuery = "DELETE FROM `csms`.`partner` WHERE (`partner_id` = ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setInt(1, partnerId);
 
@@ -296,5 +299,35 @@ public class DbUtil {
 
     public void addMember(Member member) {
 
+    }
+
+    public void addPartner(Partner partner) {
+        try {
+            String sqlQuery = "INSERT INTO `csms`.`partner` (`name`, `phone_number`, `address`) " +
+                    "VALUES (?, ?, ?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setString(1, partner.getName());
+            stmt.setString(2, partner.getPhone());
+            stmt.setString(3, partner.getAddress());
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePartner(Partner partner) {
+        try {
+            String sqlQuery = "UPDATE `csms`.`partner` " +
+                    "SET `name` = ?, `phone_number` = ?, `address` = ?" +
+                    "WHERE (`partner_id` = ?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setString(1, partner.getName());
+            stmt.setString(2, partner.getPhone());
+            stmt.setString(3, partner.getAddress());
+            stmt.setInt(4, partner.getPartnerId());
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
