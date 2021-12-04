@@ -55,7 +55,9 @@ public class DbUtil {
     public List<TableData> getDataTable() {
         List<TableData> data = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id and a.account_id = m.account_id";
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                    + "FROM transaction t, member m, partner p, account a\n"
+                    + "where t.member_id = m.member_id and t.partner_id = p.partner_id and a.account_id = m.account_id";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
             int index = 0;
@@ -194,5 +196,38 @@ public class DbUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public List<TableData> searchTransaction(String projectName, String partner) {
+        List<TableData> tableData = new ArrayList<>();
+        try {
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                    + "FROM transaction t, member m, partner p, account a\n"
+                    + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
+                    + "and a.account_id = m.account_id and t.project_name like \"%?%\" and p.name like \"%?%\"";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setString(1, projectName);
+            stmt.setString(2, partner);
+            ResultSet rs = stmt.executeQuery();
+            int index = 0;
+            while (rs.next()) {
+                index++;
+                tableData.add(new TableData(
+                        rs.getInt("transaction_id"),
+                        index,
+                        rs.getString("username"),
+                        rs.getString("fullname"),
+                        rs.getString("project_name"),
+                        rs.getString("name"),
+                        rs.getLong("total_money"),
+                        rs.getDate("start_time"),
+                        rs.getString("action"),
+                        rs.getString("content"),
+                        rs.getInt("status")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tableData;
     }
 }
