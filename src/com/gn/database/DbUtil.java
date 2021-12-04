@@ -155,6 +155,7 @@ public class DbUtil {
             Member member;
             if (rs.next()) {
                 member = new Member(
+                        1,
                         rs.getInt("member_id"),
                         rs.getInt("account_id"),
                         rs.getString("fullname"),
@@ -162,7 +163,12 @@ public class DbUtil {
                         rs.getDate("birthday"),
                         rs.getString("phone_number"),
                         rs.getString("address"),
-                        rs.getString("tax_code"));
+                        rs.getString("tax_code"),
+                        rs.getString("career"),
+                        rs.getString("email"),
+                        rs.getString("site"),
+                        rs.getString("brief"),
+                        rs.getString("intro"));
             } else {
                 member = new Member();
             }
@@ -196,6 +202,8 @@ public class DbUtil {
         }
     }
 
+
+
     public List<TableData> searchTransaction(String projectName, String partner) {
         List<TableData> tableData = new ArrayList<>();
         try {
@@ -227,5 +235,66 @@ public class DbUtil {
             e.printStackTrace();
         }
         return tableData;
+    }
+
+    public List<Member> getListMember() {
+        List<Member> memberData = new ArrayList<>();
+        try {
+            String sqlQuery = "SELECT * FROM member";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            int index = 0;
+            while (rs.next()) {
+                index++;
+                memberData.add(new Member(
+                        index,
+                        rs.getInt("member_id"),
+                        rs.getInt("account_id"),
+                        rs.getString("fullname"),
+                        rs.getString("gender"),
+                        rs.getDate("birthday"),
+                        rs.getString("phone_number"),
+                        rs.getString("address"),
+                        rs.getString("tax_code"),
+                        rs.getString("career"),
+                        rs.getString("email"),
+                        rs.getString("site"),
+                        rs.getString("brief"),
+                        rs.getString("intro")
+                ));
+            }
+            return memberData;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void deleteMember(int memberId) {
+        try {
+            String sqlQuery = "DELETE FROM `csms`.`member` WHERE (`member_id` = ?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setInt(1, memberId);
+
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePartner(int partnerId) {
+        try {
+            String sqlQuery = "DELETE FROM `csms`.`partner` WHERE (`partnerId` = ?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setInt(1, partnerId);
+
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addMember(Member member) {
+
     }
 }

@@ -19,6 +19,7 @@ package com.gn.module.profile;
 import com.gn.model.Member;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
@@ -35,15 +36,15 @@ public class Profile implements Initializable {
 
     @FXML private Label lblAddress;
 
-    @FXML private Label lblCareer;
+    @FXML private Hyperlink lblCareer;
 
-    @FXML private Label lblPhoneNumber;
+    @FXML private Hyperlink lblPhoneNumber;
 
     @FXML private Text txtAddress;
 
-    @FXML private Label lblEmail;
+    @FXML private Hyperlink lblEmail;
 
-    @FXML private Label lblSite;
+    @FXML private Hyperlink lblSite;
 
     @FXML private Text txtBrief;
 
@@ -54,18 +55,17 @@ public class Profile implements Initializable {
     @FXML private Label lblIntro;
 
     public void setValues(Member member) {
-//        TODO: Xóa các comment đi sau khi đã thêm các trường vào Member
-        setLblFullName(member.getFullName());
-        setLblAddress(member.getAddress());
-//        setLblCareer(member.getCareer());
-        setLblPhoneNumber(member.getPhone());
-        setTxtAddress(member.getAddress());
-//        setLblEmail(member.getEmail());
-//        setLblSite(member.getSite());
-//        setTxtBrief(member.getBrief());
-        setTxtBirthday(member.getBirthday().toString());
-        setTxtGender(member.getGender());
-//        setLblIntro(member.getIntro());
+        setLblFullName(member.getFullName() == null ? "" :member.getFullName());
+        setLblAddress(member.getAddress() == null ? "" :member.getAddress());
+        setLblCareer(member.getCareer() == null ? "" : member.getCareer());
+        setLblPhoneNumber(member.getPhone() == null ? "" : member.getPhone());
+        setTxtAddress(member.getAddress() == null ? "" : member.getAddress());
+        setLblEmail(member.getEmail() == null ? "" : member.getEmail());
+        setLblSite(member.getSite() == null ? "" : member.getSite());
+        setTxtBirthday(member.getBirthday() == null ? "" : member.getBirthday().toString());
+        setTxtGender(member.getGender() == null ? "" : member.getGender());
+        setTxtBrief(member.getBrief() == null ? "" : member.getBrief());
+        setLblIntro(member.getIntro() == null ? "" : member.getIntro());
     }
 
     public void setLblFullName(String lblFullName) {

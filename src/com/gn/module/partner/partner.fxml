@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="994.0" prefWidth="1681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.partner.Partner">
+<StackPane prefHeight="994.0" prefWidth="1681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.partner.PartnerController">
     <children>
         <VBox prefWidth="1661.0" spacing="20.0">
             <StackPane.margin>

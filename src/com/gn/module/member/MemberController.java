@@ -1,6 +1,7 @@
-package com.gn.module.partner;
+package com.gn.module.member;
 
 import com.gn.database.DbUtil;
+import com.gn.model.Member;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,36 +14,36 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Partner implements Initializable {
+public class MemberController implements Initializable {
 
     private final DbUtil dbUtil = new DbUtil();
 
     @FXML
-    private TableView<com.gn.model.Partner> tableView;
+    private TableView<com.gn.model.Member> tableView;
     @FXML
-    private TableColumn<com.gn.model.Partner, Integer> colIndex;
+    private TableColumn<com.gn.model.Member, Integer> colIndex;
     @FXML
-    private TableColumn<com.gn.model.Partner, String> colName;
+    private TableColumn<com.gn.model.Member, String> colName;
     @FXML
-    private TableColumn<com.gn.model.Partner, String> colPhoneNumber;
+    private TableColumn<com.gn.model.Member, String> colPhoneNumber;
     @FXML
-    private TableColumn<com.gn.model.Partner, String> colAddress;
+    private TableColumn<com.gn.model.Member, String> colAddress;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colIndex.setCellValueFactory(new PropertyValueFactory<>("partnerId"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colIndex.setCellValueFactory(new PropertyValueFactory<>("MemberId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
 
         updateView();
 
         tableView.setRowFactory(tv -> {
-            TableRow<com.gn.model.Partner> row = new TableRow<>();
+            TableRow<Member> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    com.gn.model.Partner rowData = row.getItem();
-//                    TODO: Mở dialog thông tin Partner
+                    Member rowData = row.getItem();
+//                    TODO: Mở dialog thông tin Member
                 }
             });
             return row;
@@ -50,20 +51,20 @@ public class Partner implements Initializable {
     }
 
     public void updateView() {
-        ObservableList<com.gn.model.Partner> tableData = FXCollections.observableArrayList();
-        tableData.addAll(dbUtil.getListPartner());
-
+        ObservableList<Member> tableData = FXCollections.observableArrayList();
+        tableData.addAll(dbUtil.getListMember());
         tableView.setItems(tableData);
     }
 
     @FXML
-    public void addPartner() {
+    public void addMember() {
 
     }
 
     @FXML
-    public void deletePartner() {
-        com.gn.model.Partner selectedRow = tableView.getSelectionModel().getSelectedItem();
-//        TODO: Gọi hàm deletePartner trong dbUtil
+    public void deleteMember() {
+        Member selectedRow = tableView.getSelectionModel().getSelectedItem();
+        dbUtil.deleteMember(selectedRow.getMemberId());
+        updateView();
     }
 }

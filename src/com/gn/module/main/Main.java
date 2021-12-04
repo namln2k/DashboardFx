@@ -18,22 +18,17 @@ package com.gn.module.main;
 
 import com.gn.App;
 import com.gn.global.plugin.ViewManager;
-import com.gn.module.partner.Partner;
 import com.gn.module.profile.Profile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import static jdk.nashorn.internal.objects.Global.load;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
