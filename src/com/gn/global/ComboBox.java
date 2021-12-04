@@ -1,5 +1,7 @@
 package com.gn.global;
 
+import java.util.List;
+
 public class ComboBox {
     public static <T> void prepareComboBox(javafx.scene.control.ComboBox comboBox, Iterable<T> options) {
         for (T option : options) {
@@ -10,5 +12,4 @@ public class ComboBox {
     public static <T> void setValue(javafx.scene.control.ComboBox comboBox, T value) {
         comboBox.setValue(value);
     }
-
 }

@@ -22,7 +22,6 @@ import com.gn.global.Formatter;
 import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.model.Transaction;
-import com.gn.module.dashboard.Dashboard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -30,6 +29,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,6 +42,7 @@ import java.util.ResourceBundle;
 public class DialogTransaction implements Initializable {
 
     private static TableData target;
+    private final DbUtil dbUtil = new DbUtil();
     @FXML
     private TextField txfProject;
     @FXML
@@ -62,8 +63,6 @@ public class DialogTransaction implements Initializable {
     private Button btnCancel;
     @FXML
     private Label lblTitle;
-
-    private final DbUtil dbUtil = new DbUtil();
 
     public TableData getTarget() {
         return target;
@@ -115,11 +114,8 @@ public class DialogTransaction implements Initializable {
 
     private void prepareComboBoxes() {
         List<Partner> partnerList = dbUtil.getListPartner();
-        for (Partner partner : partnerList) {
-            cbxPartner.getItems().add(partner.getName());
-        }
-
-        cbxStatus.getItems().addAll("Pending", "Completed");
+        com.gn.global.ComboBox.prepareComboBox(cbxPartner, partnerList);
+        com.gn.global.ComboBox.prepareComboBox(cbxStatus, Arrays.asList("Pending", "Completed"));
     }
 
     @Override
