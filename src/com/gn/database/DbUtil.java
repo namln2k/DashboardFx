@@ -179,13 +179,16 @@ public class DbUtil {
 
 //    TODO: Thêm hàm getListAccount(): Lấy tất cả account
 
-    public List<TableData> searchTransaction(String projectName, String partner) {
+    public List<TableData> searchTransaction(String projectName, String partner, String username) {
         List<TableData> tableData = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id " + "and a.account_id = m.account_id and t.project_name like ? and p.name like ?";
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                    + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
+                    + "and a.account_id = m.account_id and t.project_name like ? and p.name like ? and a.username like ?";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, "%" + projectName + "%");
             stmt.setString(2, "%" + partner + "%");
+            stmt.setString(3, "%" + username + "%");
             ResultSet rs = stmt.executeQuery();
             int index = 0;
             while (rs.next()) {

@@ -48,7 +48,8 @@ import java.util.ResourceBundle;
 public class Dashboard implements Initializable {
 
     private final DbUtil dbUtil = new DbUtil();
-
+    @FXML
+    public Button btnReset;
     @FXML
     private TableView<TableData> tableView;
     @FXML
@@ -166,5 +167,23 @@ public class Dashboard implements Initializable {
     void addTransaction(ActionEvent event) throws IOException {
         DialogTransaction.setTarget(new TableData());
         openDialog();
+    }
+
+    public void searchTransaction() {
+        String username = cbxUsername.getValue() == null ? "" : cbxUsername.getValue().toString() ;
+        String partner = cbxPartner.getValue() == null ? "" : cbxPartner.getValue().toString();
+        String project = txfProject.getText() == null ? "" : txfProject.getText();
+
+
+        ObservableList<TableData> tableData = FXCollections.observableArrayList();
+        tableData.addAll(dbUtil.searchTransaction(project, partner, username));
+        tableView.setItems(tableData);
+    }
+
+    public void resetTransaction(ActionEvent actionEvent) {
+        com.gn.global.ComboBox.setValue(cbxUsername, null);
+        com.gn.global.ComboBox.setValue(cbxPartner, null);
+        txfProject.setText("");
+        updateView();
     }
 }
