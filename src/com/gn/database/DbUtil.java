@@ -1,9 +1,6 @@
 package com.gn.database;
 
-import com.gn.model.Member;
-import com.gn.model.Partner;
-import com.gn.model.TableData;
-import com.gn.model.Transaction;
+import com.gn.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -297,8 +294,15 @@ public class DbUtil {
         }
     }
 
-    public void addMember(Member member) {
-
+    public void addMember(int accountId) {
+        try {
+            String sqlQuery = "INSERT INTO `csms`.`member` (`account_id`) VALUES (?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setInt(1, accountId);
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void addPartner(Partner partner) {
@@ -325,6 +329,58 @@ public class DbUtil {
             stmt.setString(2, partner.getPhone());
             stmt.setString(3, partner.getAddress());
             stmt.setInt(4, partner.getPartnerId());
+
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int addAccount(Account account) {
+        try {
+            String sqlQuery = "INSERT INTO `csms`.`account` (`username`, `password`, `role`) " +
+                    "VALUES (?, ?, ?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setString(1, account.getUsername());
+            stmt.setString(2, account.getPassword());
+            stmt.setInt(3, 1);
+
+            stmt.execute();
+
+            String query = "SELECT account_id FROM account ORDER BY account_id desc";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            if (rs.next()) {
+                int accountId = rs.getInt("account_id");
+                addMember(accountId);
+                return accountId;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void updateMember(Member member) {
+        try {
+            String sqlQuery = "UPDATE `csms`.`member` " +
+                    "SET `fullname` = ?, `gender` = ?, `birthday` = ?, " +
+                    "`phone_number` = ?, `address` = ?, `tax_code` = ?, `career` = ?, " +
+                    "`email` = ?, `site` = ?, `brief` = ?, `intro` = ? WHERE (`account_id` = ?);";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setString(1, member.getFullName());
+            stmt.setString(2, member.getGender());
+            stmt.setDate(3, new java.sql.Date(member.getBirthday().getTime()));
+            stmt.setString(4, member.getPhone());
+            stmt.setString(5, member.getAddress());
+            stmt.setString(6, member.getTaxCode());
+            stmt.setString(7, member.getCareer());
+            stmt.setString(8, member.getEmail());
+            stmt.setString(9, member.getSite());
+            stmt.setString(10, member.getBrief());
+            stmt.setString(11, member.getIntro());
+            stmt.setInt(12, member.getAccountId());
+
             stmt.execute();
         } catch (Exception e) {
             e.printStackTrace();

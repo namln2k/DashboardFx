@@ -39,15 +39,22 @@ public class Member {
         this.memberId = 0;
     }
 
-    public Member(int memberId, int accountId, String fullName, String gender, Date birthday, String phone, String address, String taxCode) {
-        this.memberId = memberId;
+    public Member(int accountId) {
         this.accountId = accountId;
+    }
+
+    public Member(String fullName, String gender, Date birthday, String phone, String address, String taxCode, String career, String email, String site, String brief, String intro) {
         this.fullName = fullName;
         this.gender = gender;
         this.birthday = birthday;
         this.phone = phone;
         this.address = address;
         this.taxCode = taxCode;
+        this.career = career;
+        this.email = email;
+        this.site = site;
+        this.brief = brief;
+        this.intro = intro;
     }
 
     public int getIndex() {

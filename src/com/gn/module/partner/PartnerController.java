@@ -48,11 +48,16 @@ public class PartnerController implements Initializable {
         updateView();
 
         tableView.setRowFactory(tv -> {
-            TableRow<com.gn.model.Partner> row = new TableRow<>();
+            TableRow<Partner> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    com.gn.model.Partner rowData = row.getItem();
-//                    TODO: Mở dialog thông tin Partner
+                    Partner rowData = row.getItem();
+                    DialogPartner.setTarget(rowData);
+                    try {
+                        openDialog();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             return row;

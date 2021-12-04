@@ -1,16 +1,25 @@
 package com.gn.module.member;
 
 import com.gn.database.DbUtil;
+import com.gn.model.Account;
 import com.gn.model.Member;
+import com.gn.module.dialog.DialogAccount;
+import com.gn.module.dialog.DialogMember;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,7 +46,7 @@ public class MemberController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        colIndex.setCellValueFactory(new PropertyValueFactory<>("MemberId"));
+        colIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
         colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -52,7 +61,12 @@ public class MemberController implements Initializable {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Member rowData = row.getItem();
-//                    TODO: Mở dialog thông tin Member
+                    DialogMember.setTarget(rowData);
+                    try {
+                        openDialog("dialog_member.fxml", 900, 600);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             return row;
@@ -65,9 +79,26 @@ public class MemberController implements Initializable {
         tableView.setItems(tableData);
     }
 
-    @FXML
-    public void addMember() {
+    public void openDialog(String type, int width, int height) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/gn/module/dialog/" + type));
+        Parent parent = fxmlLoader.load();
 
+        Scene scene = new Scene(parent, width, height);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+
+        if (!stage.isShowing()) {
+            updateView();
+        }
+    }
+
+    @FXML
+    public void addMember() throws IOException {
+        DialogAccount.setTarget(new Account());
+        openDialog("dialog_account.fxml", 642, 405);
     }
 
     @FXML

@@ -85,10 +85,10 @@ public class DialogTransaction implements Initializable {
             txfMoney.setText(String.valueOf(data.getMoney()));
         }
         dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
-        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
+//        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
         txfAction.setText(data.getAction());
         txaContent.setText(data.getContent());
-        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
+//        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
     }
 
     private Transaction getValues() {

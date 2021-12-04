@@ -29,22 +29,22 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Project">
+                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Họ và tên">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txfProject" prefHeight="50.0" prefWidth="255.0" />
+                                <TextField fx:id="tfxFullName" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Partner">
+                                <Label prefHeight="50.0" prefWidth="110.0" styleClass="h4" text="Giới tính">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="cbxPartner" prefHeight="50.0" prefWidth="255.0" />
+                                <ComboBox fx:id="cbxGender" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                     </children>
@@ -53,22 +53,22 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Money">
+                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Sinh nhật">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txfMoney" prefHeight="50.0" prefWidth="255.0" />
+                                <DatePicker fx:id="dpkBirthday" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Time">
+                                <Label prefHeight="50.0" prefWidth="110.0" styleClass="h4" text="Địa chỉ">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <DatePicker fx:id="dpkTime" prefHeight="50.0" prefWidth="255.0" />
+                                <TextField fx:id="txfAddress" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                     </children>
@@ -77,36 +77,84 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Action">
+                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Mã số thuế">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txfAction" prefHeight="50.0" prefWidth="255.0" />
+                                <TextField fx:id="txfTaxCode" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Status">
+                                <Label prefHeight="50.0" prefWidth="110.0" styleClass="h4" text="Nghề nghiệp">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <ComboBox fx:id="cbxStatus" prefHeight="50.0" prefWidth="255.0" />
+                        <TextField fx:id="txfCareer" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="278.0" prefHeight="100.0" prefWidth="801.0">
-                    <children>
-                        <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Content">
-                            <font>
-                                <Font name="System Bold" size="20.0" />
-                            </font>
+            <HBox prefHeight="100.0" prefWidth="801.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Email">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
                         </Label>
-                        <TextArea fx:id="txaContent" prefHeight="100.0" prefWidth="385.0" wrapText="true" />
-                    </children>
-                </HBox>
+                        <TextField fx:id="txfEmail" prefHeight="50.0" prefWidth="255.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="450.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="110.0" styleClass="h4" text="Link">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txfLink" prefHeight="50.0" prefWidth="255.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="801.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="SĐT">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txfPhone" prefHeight="50.0" prefWidth="255.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="450.0">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="110.0" styleClass="h4" text="Giới thiệu">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txfBrief" prefHeight="50.0" prefWidth="255.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="801.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="155.0" styleClass="h4" text="Giới thiệu chi tiết">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="txaIntro" prefHeight="100.0" prefWidth="550.0" wrapText="true" />
+               </children>
+            </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" prefHeight="133.0" prefWidth="900.0" spacing="100.0">
                     <children>
                         <Button fx:id="btnProcess" mnemonicParsing="false" onAction="#processDialog" pickOnBounds="false" prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" />
