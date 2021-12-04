@@ -74,19 +74,19 @@
                         <HBox alignment="CENTER" prefWidth="320.0" spacing="10.0">
                            <children>
                               <Label styleClass="h4" text="Username" />
-                              <ComboBox prefHeight="50.0" prefWidth="150.0" />
+                              <ComboBox fx:id="cbxUsername" prefHeight="50.0" prefWidth="150.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="181.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                            <children>
                               <Label styleClass="h4" text="Partner" />
-                              <ComboBox prefHeight="50.0" prefWidth="150.0" />
+                              <ComboBox fx:id="cbxPartner" prefHeight="50.0" prefWidth="150.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="266.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                            <children>
                               <Label styleClass="h4" text="Project" />
-                              <TextField prefHeight="50.0" prefWidth="150.0" />
+                              <TextField fx:id="txfProject" prefHeight="50.0" prefWidth="150.0" />
                            </children>
                         </HBox>
                      </children>

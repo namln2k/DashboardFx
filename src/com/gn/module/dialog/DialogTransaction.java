@@ -22,7 +22,6 @@ import com.gn.global.Formatter;
 import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.model.Transaction;
-import com.gn.module.dashboard.Dashboard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -30,6 +29,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,6 +42,7 @@ import java.util.ResourceBundle;
 public class DialogTransaction implements Initializable {
 
     private static TableData target;
+    private final DbUtil dbUtil = new DbUtil();
     @FXML
     private TextField txfProject;
     @FXML
@@ -63,8 +64,6 @@ public class DialogTransaction implements Initializable {
     @FXML
     private Label lblTitle;
 
-    private final DbUtil dbUtil = new DbUtil();
-
     public TableData getTarget() {
         return target;
     }
@@ -77,18 +76,6 @@ public class DialogTransaction implements Initializable {
     private void closeDialog() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
-    }
-
-    private void setValues(TableData data) {
-        txfProject.setText(data.getProject());
-        if (data.getMoney() != 0) {
-            txfMoney.setText(String.valueOf(data.getMoney()));
-        }
-        dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
-        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
-        txfAction.setText(data.getAction());
-        txaContent.setText(data.getContent());
-        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
     }
 
     private Transaction getValues() {
@@ -113,13 +100,22 @@ public class DialogTransaction implements Initializable {
         return transaction;
     }
 
+    private void setValues(TableData data) {
+        txfProject.setText(data.getProject());
+        if (data.getMoney() != 0) {
+            txfMoney.setText(String.valueOf(data.getMoney()));
+        }
+        dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
+        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
+        txfAction.setText(data.getAction());
+        txaContent.setText(data.getContent());
+        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
+    }
+
     private void prepareComboBoxes() {
         List<Partner> partnerList = dbUtil.getListPartner();
-        for (Partner partner : partnerList) {
-            cbxPartner.getItems().add(partner.getName());
-        }
-
-        cbxStatus.getItems().addAll("Pending", "Completed");
+        com.gn.global.ComboBox.prepareComboBox(cbxPartner, partnerList);
+        com.gn.global.ComboBox.prepareComboBox(cbxStatus, Arrays.asList("Pending", "Completed"));
     }
 
     @Override

@@ -17,6 +17,9 @@
 package com.gn.module.dashboard;
 
 import com.gn.database.DbUtil;
+import com.gn.model.Account;
+import com.gn.model.Member;
+import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.module.dialog.DialogTransaction;
 import javafx.collections.FXCollections;
@@ -27,16 +30,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -71,6 +74,13 @@ public class Dashboard implements Initializable {
     @FXML
     private TableColumn<TableData, String> colStatus;
 
+    @FXML
+    private ComboBox cbxUsername;
+    @FXML
+    private ComboBox cbxPartner;
+    @FXML
+    private TextField txfProject;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
@@ -85,6 +95,8 @@ public class Dashboard implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         updateView();
+
+        prepareComboBoxes();
 
         tableView.setRowFactory(tv -> {
             TableRow<TableData> row = new TableRow<>();
@@ -108,6 +120,20 @@ public class Dashboard implements Initializable {
         tableData.addAll(dbUtil.getDataTable());
 
         tableView.setItems(tableData);
+    }
+
+    private void prepareComboBoxes() {
+        List<String> partners = new ArrayList<String>();
+        for (Partner partner : dbUtil.getListPartner()) {
+            partners.add(partner.getName());
+        }
+        com.gn.global.ComboBox.prepareComboBox(cbxPartner, partners);
+
+        List<String> usernames = new ArrayList<String>();
+//        for (Account account : dbUtil.getListAccount()) {
+//            usernames.add(account.getUsername());
+//        }
+        com.gn.global.ComboBox.prepareComboBox(cbxUsername, usernames);
     }
 
     @FXML
