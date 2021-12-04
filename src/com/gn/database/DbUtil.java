@@ -71,6 +71,20 @@ public class DbUtil {
         }
     }
 
+    public int getPartnerId(String partnerName) {
+        try {
+            String sqlQuery = "SELECT partner_id FROM partner WHERE name = ?";
+            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
+            stmt.setString(1, partnerName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next())
+                return rs.getInt("partner_id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public void addTransaction(Transaction transaction) {
         try {
             String sqlQuery = "INSERT INTO `csms`.`transaction` " + "(`member_id`, `partner_id`, `project_name`, `start_time`, " + "`total_money`, `action`, `content`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";

@@ -93,13 +93,22 @@ public class Dialog implements Initializable {
 
     private Transaction getValues() {
         String project = this.txfProject.getText();
-        String partner = this.cbxPartner.getValue();
+        int partnerId = dbUtil.getPartnerId(this.cbxPartner.getValue());
         long money = Long.valueOf(this.txfMoney.getText());
         Date time = Date.from(this.dpkTime.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         String action = this.txfAction.getText();
         String content = this.txaContent.getText();
+        int status = this.cbxStatus.getValue().equals("Completed") ? 1 : 0;
 
-        Transaction transaction = new Transaction(App.member.getMemberId(), 1, project, time, money, action, content, 1);
+        Transaction transaction = new Transaction(
+                App.member.getMemberId(),
+                partnerId,
+                project,
+                time,
+                money,
+                action,
+                content,
+                status);
 
         return transaction;
     }
