@@ -10,14 +10,6 @@ public class Partner {
     public Partner() {
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
     public Partner(int index, int partnerId, String name, String phone, String address) {
         this.index = index;
         this.partnerId = partnerId;
@@ -37,6 +29,14 @@ public class Partner {
         this.name = name;
         this.phone = phone;
         this.address = address;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public int getPartnerId() {

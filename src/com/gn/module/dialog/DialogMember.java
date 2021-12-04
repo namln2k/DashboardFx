@@ -3,7 +3,6 @@ package com.gn.module.dialog;
 import com.gn.database.DbUtil;
 import com.gn.global.Formatter;
 import com.gn.model.Member;
-import com.gn.model.Partner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,17 +56,8 @@ public class DialogMember implements Initializable {
         return target;
     }
 
-    private void setValues(Member data) {
-        tfxFullName.setText(data.getFullName());
-        txfAddress.setText(data.getAddress());
-        txfCareer.setText(data.getCareer());
-        txfBrief.setText(data.getBrief());
-        txaIntro.setText(data.getIntro());
-        txfEmail.setText(data.getEmail());
-        txfTaxCode.setText(data.getTaxCode());
-        dpkBirthday.setValue(Formatter.toLocalDate(data.getBirthday()));
-        txfLink.setText(data.getSite());
-        txfPhone.setText(data.getPhone());
+    public static void setTarget(Member target) {
+        DialogMember.target = target;
     }
 
     private Member getValues() {
@@ -88,18 +78,33 @@ public class DialogMember implements Initializable {
         return member;
     }
 
-    public static void setTarget(Member target) {
-        DialogMember.target = target;
+    private void setValues(Member data) {
+        tfxFullName.setText(data.getFullName());
+        txfAddress.setText(data.getAddress());
+        txfCareer.setText(data.getCareer());
+        txfBrief.setText(data.getBrief());
+        com.gn.global.ComboBox.setValue(cbxGender, data.getGender());
+        txaIntro.setText(data.getIntro());
+        txfEmail.setText(data.getEmail());
+        txfTaxCode.setText(data.getTaxCode());
+        dpkBirthday.setValue(Formatter.toLocalDate(data.getBirthday()));
+        txfLink.setText(data.getSite());
+        txfPhone.setText(data.getPhone());
     }
 
     @FXML
-    public void processDialog(ActionEvent actionEvent) {
-        Member member = getValues();
+    public void processDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có chắc chắn muốn cập nhật?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
-        member.setAccountId(target.getAccountId());
-        dbUtil.updateMember(member);
+        if (alert.getResult() == ButtonType.YES) {
+            Member member = getValues();
 
-        closeDialog();
+            member.setAccountId(target.getAccountId());
+            dbUtil.updateMember(member);
+
+            closeDialog();
+        }
     }
 
     @FXML

@@ -1,7 +1,5 @@
 package com.gn.global;
 
-import java.util.List;
-
 public class ComboBox {
     public static <T> void prepareComboBox(javafx.scene.control.ComboBox comboBox, Iterable<T> options) {
         for (T option : options) {

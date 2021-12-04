@@ -113,16 +113,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "transactionId=" + transactionId +
-                ", memberId=" + memberId +
-                ", partnerId=" + partnerId +
-                ", projectName='" + projectName + '\'' +
-                ", startTime=" + startTime +
-                ", totalMoney=" + totalMoney +
-                ", action='" + action + '\'' +
-                ", content='" + content + '\'' +
-                ", status=" + status +
-                '}';
+        return "Transaction{" + "transactionId=" + transactionId + ", memberId=" + memberId + ", partnerId=" + partnerId + ", projectName='" + projectName + '\'' + ", startTime=" + startTime + ", totalMoney=" + totalMoney + ", action='" + action + '\'' + ", content='" + content + '\'' + ", status=" + status + '}';
     }
 }

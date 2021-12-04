@@ -32,31 +32,42 @@ import java.util.ResourceBundle;
  */
 public class Profile implements Initializable {
 
-    @FXML private Label lblFullName;
+    @FXML
+    private Label lblFullName;
 
-    @FXML private Label lblAddress;
+    @FXML
+    private Label lblAddress;
 
-    @FXML private Hyperlink lblCareer;
+    @FXML
+    private Hyperlink lblCareer;
 
-    @FXML private Hyperlink lblPhoneNumber;
+    @FXML
+    private Label lblPhoneNumber;
 
-    @FXML private Text txtAddress;
+    @FXML
+    private Text txtAddress;
 
-    @FXML private Hyperlink lblEmail;
+    @FXML
+    private Label lblEmail;
 
-    @FXML private Hyperlink lblSite;
+    @FXML
+    private Label lblSite;
 
-    @FXML private Text txtBrief;
+    @FXML
+    private Text txtBrief;
 
-    @FXML private Text txtBirthday;
+    @FXML
+    private Text txtBirthday;
 
-    @FXML private Text txtGender;
+    @FXML
+    private Text txtGender;
 
-    @FXML private Label lblIntro;
+    @FXML
+    private Label lblIntro;
 
     public void setValues(Member member) {
-        setLblFullName(member.getFullName() == null ? "" :member.getFullName());
-        setLblAddress(member.getAddress() == null ? "" :member.getAddress());
+        setLblFullName(member.getFullName() == null ? "" : member.getFullName());
+        setLblAddress(member.getAddress() == null ? "" : member.getAddress());
         setLblCareer(member.getCareer() == null ? "" : member.getCareer());
         setLblPhoneNumber(member.getPhone() == null ? "" : member.getPhone());
         setTxtAddress(member.getAddress() == null ? "" : member.getAddress());

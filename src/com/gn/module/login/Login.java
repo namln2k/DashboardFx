@@ -65,7 +65,7 @@ public class Login implements Initializable {
     @FXML
     private Label lblError;
 
-    private RotateTransition rotateTransition = new RotateTransition();
+    private final RotateTransition rotateTransition = new RotateTransition();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

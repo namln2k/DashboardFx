@@ -29,10 +29,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -78,18 +75,6 @@ public class DialogTransaction implements Initializable {
         stage.close();
     }
 
-    private void setValues(TableData data) {
-        txfProject.setText(data.getProject());
-        if (data.getMoney() != 0) {
-            txfMoney.setText(String.valueOf(data.getMoney()));
-        }
-        dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
-//        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
-        txfAction.setText(data.getAction());
-        txaContent.setText(data.getContent());
-//        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
-    }
-
     private Transaction getValues() {
         String project = this.txfProject.getText();
         int partnerId = dbUtil.getPartnerId(this.cbxPartner.getValue());
@@ -99,22 +84,29 @@ public class DialogTransaction implements Initializable {
         String content = this.txaContent.getText();
         int status = this.cbxStatus.getValue().equals("Completed") ? 1 : 0;
 
-        Transaction transaction = new Transaction(
-                App.member.getMemberId(),
-                partnerId,
-                project,
-                time,
-                money,
-                action,
-                content,
-                status);
+        Transaction transaction = new Transaction(App.member.getMemberId(), partnerId, project, time, money, action, content, status);
 
         return transaction;
     }
 
+    private void setValues(TableData data) {
+        txfProject.setText(data.getProject());
+        if (data.getMoney() != 0) {
+            txfMoney.setText(String.valueOf(data.getMoney()));
+        }
+        dpkTime.setValue(Formatter.toLocalDate(data.getTime()));
+        com.gn.global.ComboBox.setValue(cbxPartner, data.getPartner());
+        txfAction.setText(data.getAction());
+        txaContent.setText(data.getContent());
+        com.gn.global.ComboBox.setValue(cbxStatus, data.getStatus());
+    }
+
     private void prepareComboBoxes() {
-        List<Partner> partnerList = dbUtil.getListPartner();
-        com.gn.global.ComboBox.prepareComboBox(cbxPartner, partnerList);
+        List<String> partners = new ArrayList<>();
+        for (Partner partner : dbUtil.getListPartner()) {
+            partners.add(partner.getName());
+        }
+        com.gn.global.ComboBox.prepareComboBox(cbxPartner, partners);
         com.gn.global.ComboBox.prepareComboBox(cbxStatus, Arrays.asList("Pending", "Completed"));
     }
 
@@ -141,14 +133,19 @@ public class DialogTransaction implements Initializable {
 
     @FXML
     private void processDialog() {
-        Transaction transaction = getValues();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có chắc chắn muốn cập nhật?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
-        if (target.getIndex() == 0) {
-            dbUtil.addTransaction(transaction);
-        } else {
-            dbUtil.updateTransaction(transaction);
+        if (alert.getResult() == ButtonType.YES) {
+            Transaction transaction = getValues();
+
+            if (target.getIndex() == 0) {
+                dbUtil.addTransaction(transaction);
+            } else {
+                dbUtil.updateTransaction(transaction);
+            }
+
+            closeDialog();
         }
-
-        closeDialog();
     }
 }

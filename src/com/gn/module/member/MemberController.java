@@ -3,6 +3,7 @@ package com.gn.module.member;
 import com.gn.database.DbUtil;
 import com.gn.model.Account;
 import com.gn.model.Member;
+import com.gn.model.TableData;
 import com.gn.module.dialog.DialogAccount;
 import com.gn.module.dialog.DialogMember;
 import javafx.collections.FXCollections;
@@ -12,9 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -98,13 +97,19 @@ public class MemberController implements Initializable {
     @FXML
     public void addMember() throws IOException {
         DialogAccount.setTarget(new Account());
+
         openDialog("dialog_account.fxml", 642, 405);
     }
 
     @FXML
     public void deleteMember() {
-        Member selectedRow = tableView.getSelectionModel().getSelectedItem();
-        dbUtil.deleteMember(selectedRow.getMemberId());
-        updateView();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có chắc chắn muốn xóa?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            Member selectedRow = tableView.getSelectionModel().getSelectedItem();
+            dbUtil.deleteMember(selectedRow.getMemberId());
+            updateView();
+        }
     }
 }

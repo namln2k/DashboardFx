@@ -50,9 +50,7 @@ public class DbUtil {
     public List<TableData> getDataTable() {
         List<TableData> data = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
-                    + "FROM transaction t, member m, partner p, account a\n"
-                    + "where t.member_id = m.member_id and t.partner_id = p.partner_id and a.account_id = m.account_id";
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id and a.account_id = m.account_id";
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sqlQuery);
             int index = 0;
@@ -74,8 +72,7 @@ public class DbUtil {
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, partnerName);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next())
-                return rs.getInt("partner_id");
+            if (rs.next()) return rs.getInt("partner_id");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,9 +138,7 @@ public class DbUtil {
     public Member getAccountMember(String username, String password) {
 
         try {
-            String sqlQuery = "SELECT member.* \n" +
-                    "FROM member \n" +
-                    "WHERE member.account_id  = (SELECT account_id FROM account WHERE username = ? and password = ?)";
+            String sqlQuery = "SELECT member.* \n" + "FROM member \n" + "WHERE member.account_id  = (SELECT account_id FROM account WHERE username = ? and password = ?)";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -151,21 +146,7 @@ public class DbUtil {
             ResultSet rs = stmt.executeQuery();
             Member member;
             if (rs.next()) {
-                member = new Member(
-                        1,
-                        rs.getInt("member_id"),
-                        rs.getInt("account_id"),
-                        rs.getString("fullname"),
-                        rs.getString("gender"),
-                        rs.getDate("birthday"),
-                        rs.getString("phone_number"),
-                        rs.getString("address"),
-                        rs.getString("tax_code"),
-                        rs.getString("career"),
-                        rs.getString("email"),
-                        rs.getString("site"),
-                        rs.getString("brief"),
-                        rs.getString("intro"));
+                member = new Member(1, rs.getInt("member_id"), rs.getInt("account_id"), rs.getString("fullname"), rs.getString("gender"), rs.getDate("birthday"), rs.getString("phone_number"), rs.getString("address"), rs.getString("tax_code"), rs.getString("career"), rs.getString("email"), rs.getString("site"), rs.getString("brief"), rs.getString("intro"));
             } else {
                 member = new Member();
             }
@@ -186,13 +167,7 @@ public class DbUtil {
             int index = 0;
             while (rs.next()) {
                 index++;
-                partners.add(new Partner(
-                        index,
-                        rs.getInt("partner_id"),
-                        rs.getString("name"),
-                        rs.getString("phone_number"),
-                        rs.getString("address")
-                ));
+                partners.add(new Partner(index, rs.getInt("partner_id"), rs.getString("name"), rs.getString("phone_number"), rs.getString("address")));
             }
 //            connection.close();
             return partners;
@@ -207,29 +182,15 @@ public class DbUtil {
     public List<TableData> searchTransaction(String projectName, String partner) {
         List<TableData> tableData = new ArrayList<>();
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
-                    + "FROM transaction t, member m, partner p, account a\n"
-                    + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
-                    + "and a.account_id = m.account_id and t.project_name like \"%?%\" and p.name like \"%?%\"";
+            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n" + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id " + "and a.account_id = m.account_id and t.project_name like ? and p.name like ?";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
-            stmt.setString(1, projectName);
-            stmt.setString(2, partner);
+            stmt.setString(1, "%" + projectName + "%");
+            stmt.setString(2, "%" + partner + "%");
             ResultSet rs = stmt.executeQuery();
             int index = 0;
             while (rs.next()) {
                 index++;
-                tableData.add(new TableData(
-                        rs.getInt("transaction_id"),
-                        index,
-                        rs.getString("username"),
-                        rs.getString("fullname"),
-                        rs.getString("project_name"),
-                        rs.getString("name"),
-                        rs.getLong("total_money"),
-                        rs.getDate("start_time"),
-                        rs.getString("action"),
-                        rs.getString("content"),
-                        rs.getInt("status")));
+                tableData.add(new TableData(rs.getInt("transaction_id"), index, rs.getString("username"), rs.getString("fullname"), rs.getString("project_name"), rs.getString("name"), rs.getLong("total_money"), rs.getDate("start_time"), rs.getString("action"), rs.getString("content"), rs.getInt("status")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,22 +207,7 @@ public class DbUtil {
             int index = 0;
             while (rs.next()) {
                 index++;
-                memberData.add(new Member(
-                        index,
-                        rs.getInt("member_id"),
-                        rs.getInt("account_id"),
-                        rs.getString("fullname"),
-                        rs.getString("gender"),
-                        rs.getDate("birthday"),
-                        rs.getString("phone_number"),
-                        rs.getString("address"),
-                        rs.getString("tax_code"),
-                        rs.getString("career"),
-                        rs.getString("email"),
-                        rs.getString("site"),
-                        rs.getString("brief"),
-                        rs.getString("intro")
-                ));
+                memberData.add(new Member(index, rs.getInt("member_id"), rs.getInt("account_id"), rs.getString("fullname"), rs.getString("gender"), rs.getDate("birthday"), rs.getString("phone_number"), rs.getString("address"), rs.getString("tax_code"), rs.getString("career"), rs.getString("email"), rs.getString("site"), rs.getString("brief"), rs.getString("intro")));
             }
             return memberData;
         } catch (Exception e) {
@@ -307,8 +253,7 @@ public class DbUtil {
 
     public void addPartner(Partner partner) {
         try {
-            String sqlQuery = "INSERT INTO `csms`.`partner` (`name`, `phone_number`, `address`) " +
-                    "VALUES (?, ?, ?);";
+            String sqlQuery = "INSERT INTO `csms`.`partner` (`name`, `phone_number`, `address`) " + "VALUES (?, ?, ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, partner.getName());
             stmt.setString(2, partner.getPhone());
@@ -321,9 +266,7 @@ public class DbUtil {
 
     public void updatePartner(Partner partner) {
         try {
-            String sqlQuery = "UPDATE `csms`.`partner` " +
-                    "SET `name` = ?, `phone_number` = ?, `address` = ?" +
-                    "WHERE (`partner_id` = ?);";
+            String sqlQuery = "UPDATE `csms`.`partner` " + "SET `name` = ?, `phone_number` = ?, `address` = ?" + "WHERE (`partner_id` = ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, partner.getName());
             stmt.setString(2, partner.getPhone());
@@ -338,8 +281,7 @@ public class DbUtil {
 
     public int addAccount(Account account) {
         try {
-            String sqlQuery = "INSERT INTO `csms`.`account` (`username`, `password`, `role`) " +
-                    "VALUES (?, ?, ?);";
+            String sqlQuery = "INSERT INTO `csms`.`account` (`username`, `password`, `role`) " + "VALUES (?, ?, ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, account.getUsername());
             stmt.setString(2, account.getPassword());
@@ -363,10 +305,7 @@ public class DbUtil {
 
     public void updateMember(Member member) {
         try {
-            String sqlQuery = "UPDATE `csms`.`member` " +
-                    "SET `fullname` = ?, `gender` = ?, `birthday` = ?, " +
-                    "`phone_number` = ?, `address` = ?, `tax_code` = ?, `career` = ?, " +
-                    "`email` = ?, `site` = ?, `brief` = ?, `intro` = ? WHERE (`account_id` = ?);";
+            String sqlQuery = "UPDATE `csms`.`member` " + "SET `fullname` = ?, `gender` = ?, `birthday` = ?, " + "`phone_number` = ?, `address` = ?, `tax_code` = ?, `career` = ?, " + "`email` = ?, `site` = ?, `brief` = ?, `intro` = ? WHERE (`account_id` = ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
             stmt.setString(1, member.getFullName());
             stmt.setString(2, member.getGender());
@@ -385,5 +324,21 @@ public class DbUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<String> getListUsername() {
+        List<String> listUsername = new ArrayList<>();
+        try {
+            String sqlQuery = "Select username from account";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            while (rs.next()) {
+                listUsername.add(rs.getString("username"));
+            }
+            return listUsername;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

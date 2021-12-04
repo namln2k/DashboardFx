@@ -3,7 +3,6 @@ package com.gn.module.dialog;
 import com.gn.database.DbUtil;
 import com.gn.model.Account;
 import com.gn.model.Member;
-import com.gn.model.Partner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +22,7 @@ import java.util.ResourceBundle;
 public class DialogAccount implements Initializable {
 
     private static Account target;
+    private final DbUtil dbUtil = new DbUtil();
     @FXML
     public TextField tfxUsername;
     @FXML
@@ -36,7 +36,6 @@ public class DialogAccount implements Initializable {
     @FXML
     public Label lblTitle;
 
-    private DbUtil dbUtil = new DbUtil();
     public static Account getTarget() {
         return target;
     }

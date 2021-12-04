@@ -17,8 +17,6 @@
 package com.gn.module.dashboard;
 
 import com.gn.database.DbUtil;
-import com.gn.model.Account;
-import com.gn.model.Member;
 import com.gn.model.Partner;
 import com.gn.model.TableData;
 import com.gn.module.dialog.DialogTransaction;
@@ -123,26 +121,29 @@ public class Dashboard implements Initializable {
     }
 
     private void prepareComboBoxes() {
-        List<String> partners = new ArrayList<String>();
+        List<String> partners = new ArrayList<>();
         for (Partner partner : dbUtil.getListPartner()) {
             partners.add(partner.getName());
         }
         com.gn.global.ComboBox.prepareComboBox(cbxPartner, partners);
 
-        List<String> usernames = new ArrayList<String>();
-//        for (Account account : dbUtil.getListAccount()) {
-//            usernames.add(account.getUsername());
-//        }
+        List<String> usernames = new ArrayList<>();
+        for (String username : dbUtil.getListUsername()) {
+            usernames.add(username);
+        }
         com.gn.global.ComboBox.prepareComboBox(cbxUsername, usernames);
     }
 
     @FXML
     private void deleteTransaction(ActionEvent event) {
-        TableData selectedRow = tableView.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có chắc chắn muốn xóa?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
-        dbUtil.deleteTransaction(selectedRow.getTransactionId());
-
-        updateView();
+        if (alert.getResult() == ButtonType.YES) {
+            TableData selectedRow = tableView.getSelectionModel().getSelectedItem();
+            dbUtil.deleteTransaction(selectedRow.getTransactionId());
+            updateView();
+        }
     }
 
     public void openDialog() throws IOException {

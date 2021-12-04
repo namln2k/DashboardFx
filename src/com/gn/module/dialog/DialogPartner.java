@@ -1,27 +1,19 @@
 package com.gn.module.dialog;
 
-import com.gn.App;
 import com.gn.database.DbUtil;
-import com.gn.global.Formatter;
 import com.gn.model.Partner;
-import com.gn.model.TableData;
-import com.gn.model.Transaction;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class DialogPartner implements Initializable {
 
     private static Partner target;
+    private final DbUtil dbUtil = new DbUtil();
     @FXML
     private TextField txfName;
     @FXML
@@ -35,20 +27,12 @@ public class DialogPartner implements Initializable {
     @FXML
     private Label lblTitle;
 
-    private DbUtil dbUtil = new DbUtil();
-
     public static Partner getTarget() {
         return target;
     }
 
     public static void setTarget(Partner targetObject) {
         target = targetObject;
-    }
-
-    private void setValues(Partner data) {
-        txfName.setText(data.getName());
-        txfAddress.setText(data.getAddress());
-        txfPhone.setText(data.getPhone());
     }
 
     private Partner getValues() {
@@ -61,6 +45,12 @@ public class DialogPartner implements Initializable {
         return partner;
     }
 
+    private void setValues(Partner data) {
+        txfName.setText(data.getName());
+        txfAddress.setText(data.getAddress());
+        txfPhone.setText(data.getPhone());
+    }
+
     @FXML
     private void closeDialog() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
@@ -69,15 +59,18 @@ public class DialogPartner implements Initializable {
 
     @FXML
     private void processDialog() {
-        Partner partner = getValues();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Bạn có chắc chắn muốn cập nhật?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
-        if (target.getPartnerId() == 0) {
-            dbUtil.addPartner(partner);
-        } else {
-            dbUtil.updatePartner(partner);
+        if (alert.getResult() == ButtonType.YES) {
+            Partner partner = getValues();
+            if (target.getPartnerId() == 0) {
+                dbUtil.addPartner(partner);
+            } else {
+                dbUtil.updatePartner(partner);
+            }
+            closeDialog();
         }
-
-        closeDialog();
     }
 
     @Override
