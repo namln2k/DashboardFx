@@ -1,82 +1,111 @@
+<!-- HEADER -->
+<div id="top"></div>
+  <h3 align="center">Company Spending Management System</h3>
+  <p align="center">
+ 		Project guide    <br />
+    <a href="https://github.com/namln2k/DashboardFx"><strong>Explore the project on Github »</strong></a>
+  </p>
+</div>
 
-[![News](https://img.shields.io/badge/News-1-brightgreen.svg?style=for-the-badge)](http://gleidson28.blogspot.com)
-![Version](https://img.shields.io/badge/Version-0.3.22-green.svg?style=for-the-badge)
-[![License](https://img.shields.io/github/license/Gleidson28/GNCarousel.svg?style=for-the-badge)](https://github.com/Gleidson28/GNCarousel/blob/master/LICENSE) 
-
-
-<h1></h1>
-
-<p align="center">
-  <img src="src/logo.png"  />
-</p>
-
-
-<h1></h1>
-<h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
-
-<h1></h1>
-<h6 align="center"> Comming soon. </h6>
-
-* 1  Style Guide. 
-* 2  New custom Controls.
-* 3  More bootstrap theme.
-* 4  New Dashboard Style.
-* 5  New Version of Dashboard.
-* 6  GridFx (tests)
-
-<h1></h1>
-
-<h1> DashboardFx </h1>
-
-
-<h5> This dashboard is a collection of the samples for javafx creators.</h5>
-
-> Find templates, themes, controls, custom uis.
-
-<h1></h1>
-
-<h3> Library Dependency</h3>
-<p> find the dependencies in the lib folder.</p> 
-
-<h1></h1>
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
 
-<h3> How to use css scheme </h3>
 
-<h4> In the scene </h4>
+<!-- ABOUT THE PROJECT -->
+## About The Project
+#### Application screenshot
 
-* 1  Load fonts to use in a system that not have this font. 
-* 2  Contain a multiples colors used in all CSS system.
-* 3  This CSS override the default theme (Modena), return the max possible for 0% stylized.
-   - This technic is used in web development as reset css.
-* 4  Define the lighting theme 
-   - For dark theme getClass().getResource("/com/gn/theme/css/dark.css").toExternalForm(),
-* 5  Contains util classes. 
-   - Ex. btn-default, btn-danger..
-* 6  Define the system color used.
-    - Ex. The base color used to button is -base.. override color in root.. (.root {-base : blue;}
-    - Result in all buttons with color blue;
-    - For most details consult wiki page.
-* 7  Used to define a system of typographic.
-* 8  Used to configure shapes for nodes.
-   - rectangle, polygon, circles...
-* 9  Additional css for add effects and others.
-* 10 For you replace.
+![alt text](https://raw.githubusercontent.com/namln2k/DashboardFx/master/src/com/gn/media/img/project-screenshot.png)
 
-<h4> Direct FXml </h4>
 
-<p>Don't load the font files direct in the fxml.. can cause instability at the SceneBuilder. The fonts not installed in your system... SceneBuilder does not support load of external fonts. To view fonts in your SceneBuilder, the install fonts in your system.</p>
-  
-```html5
- <stylesheets>
-  <URL value="@../../theme/css/material-color.css" />
-  <URL value="@../../theme/css/skeleton.css" />
-  <URL value="@../../theme/css/light.css" />
-  <URL value="@../../theme/css/bootstrap.css" />
-  <URL value="@../../theme/css/simple-info.css" />
-  <URL value="@../../theme/css/shape.css" />
-  <URL value="@../../theme/css/typographic.css" />
-  <URL value="@../../theme/css/helpers.css" />
-  <URL value="@../../theme/css/master.css" />
-  </stylesheets>
-```
+
+
+### Built With
+
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+* [JavaFx](https://openjfx.io/)
+* [Java 8](https://docs.oracle.com/javase/8/docs/api/)
+* [DashboardFx by Gleidson Neves da Silveira](https://github.com/Gleidson28/DashboardFx)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+Instructions on setting up the project locally.
+To get a local copy up and running, follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* Java 8
+ https://www.oracle.com/java/technologies/downloads/#java8
+
+
+### Installation
+
+_Instructions on installing and setting up the app. _
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/namln2k/DashboardFx.git
+   ```
+2. Open project in a Java IDE (IntelliJ, Netbeans, ...) which supports Java 8
+    Run project from class com/gn/App.java
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+This app is used for managing company expenses.
+For further details, see the document
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+ See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Lê Nhật Nam - [@Nam Le Nhat](mailto:masteryi2ka5@gmail.com) - masteryi2ka5@gmail.com
+
+Project Link: [https://github.com/namln2k/DashboardFx)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
