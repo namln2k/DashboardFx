@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import java.net.*?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0"
-           prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.gn.module.dialog.DialogPartner">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.dialog.DialogPartner">
     <children>
         <VBox prefHeight="200.0" prefWidth="100.0">
             <children>
                 <HBox alignment="CENTER" prefHeight="68.0" prefWidth="900.0" style="-fx-background-color: lightblue;">
                     <children>
-                        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="51.0" prefWidth="222.0"
-                               style="-fx-text-fill: -text-color; -fx-font-size: 24; -fx-font-weight: bold;">
+                        <Label fx:id="lblTitle" alignment="CENTER" prefHeight="51.0" prefWidth="222.0" style="-fx-text-fill: -text-color; -fx-font-size: 24; -fx-font-weight: bold;">
                             <font>
-                                <Font size="8.0"/>
+                                <Font size="8.0" />
                             </font>
                         </Label>
                     </children>
@@ -24,48 +26,41 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Partner">
+                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Đối tác">
                                     <font>
-                                        <Font name="System Bold" size="20.0"/>
+                                        <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txfName" prefHeight="50.0" prefWidth="255.0"/>
+                                <TextField fx:id="txfName" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="99.0" prefWidth="450.0">
                             <children>
-                                <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Phone">
+                                <Label prefHeight="50.0" prefWidth="108.0" styleClass="h4" text="Số điện thoại">
                                     <font>
-                                        <Font name="System Bold" size="20.0"/>
+                                        <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txfPhone" prefHeight="50.0" prefWidth="255.0"/>
+                                <TextField fx:id="txfPhone" prefHeight="50.0" prefWidth="255.0" />
                             </children>
                         </HBox>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="278.0" prefHeight="100.0" prefWidth="801.0">
                     <children>
-                        <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Address">
+                        <Label prefHeight="50.0" prefWidth="100.0" styleClass="h4" text="Địa chỉ">
                             <font>
-                                <Font name="System Bold" size="20.0"/>
+                                <Font name="System Bold" size="20.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="txfAddress" prefHeight="50.0" prefWidth="255.0"/>
+                        <TextField fx:id="txfAddress" prefHeight="50.0" prefWidth="255.0" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" prefHeight="133.0" prefWidth="900.0"
-                      spacing="100.0">
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" prefHeight="133.0" prefWidth="900.0" spacing="100.0">
                     <children>
-                        <Button fx:id="btnProcess" mnemonicParsing="false" onAction="#processDialog"
-                                pickOnBounds="false" prefHeight="44.0" prefWidth="136.0"
-                                style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success"/>
-                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#resetDialog" prefHeight="44.0"
-                                prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-secondary" text="Đặt lại"/>
-                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#closeDialog" pickOnBounds="false"
-                                prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-danger" text="Hủy"/>
+                        <Button fx:id="btnProcess" mnemonicParsing="false" onAction="#processDialog" pickOnBounds="false" prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" />
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#resetDialog" prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-secondary" text="Đặt lại" />
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#closeDialog" pickOnBounds="false" prefHeight="44.0" prefWidth="136.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-danger" text="Hủy" />
                     </children>
                 </HBox>
             </children>
@@ -73,13 +68,13 @@
     </children>
 
     <stylesheets>
-        <URL value="@../../theme/css/material-color.css"/>
-        <URL value="@../../theme/css/skeleton.css"/>
-        <URL value="@../../theme/css/light.css"/>
-        <URL value="@../../theme/css/bootstrap.css"/>
-        <URL value="@../../theme/css/shape.css"/>
-        <URL value="@../../theme/css/typographic.css"/>
-        <URL value="@../../theme/css/helpers.css"/>
-        <URL value="@../../theme/css/master.css"/>
+        <URL value="@../../theme/css/material-color.css" />
+        <URL value="@../../theme/css/skeleton.css" />
+        <URL value="@../../theme/css/light.css" />
+        <URL value="@../../theme/css/bootstrap.css" />
+        <URL value="@../../theme/css/shape.css" />
+        <URL value="@../../theme/css/typographic.css" />
+        <URL value="@../../theme/css/helpers.css" />
+        <URL value="@../../theme/css/master.css" />
     </stylesheets>
 </StackPane>

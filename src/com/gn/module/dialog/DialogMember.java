@@ -68,7 +68,7 @@ public class DialogMember implements Initializable {
         String intro = this.txaIntro.getText() == null ? "" : this.txaIntro.getText();
         String email = this.txfEmail.getText() == null ? "" : this.txfEmail.getText();
         String taxCode = this.txfTaxCode.getText() == null ? "" : this.txfTaxCode.getText();
-        Date birthday = Date.from(this.dpkBirthday.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date birthday = this.dpkBirthday.getValue() == null ? null : Date.from(this.dpkBirthday.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
         String gender = this.cbxGender.getValue().toString() == null ? "" : this.cbxGender.getValue().toString();
         String phone = this.txfPhone.getText() == null ? "" : this.txfPhone.getText();
         String site = this.txfLink.getText() == null ? "" : this.txfLink.getText();

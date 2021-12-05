@@ -42,6 +42,8 @@ public class DialogAccount implements Initializable {
     public SVGPath lblErrorPassword;
     @FXML
     public SVGPath lblErrorConfirm;
+    @FXML
+    public SVGPath lblErrorUsername;
 
     public static Account getTarget() {
         return target;
@@ -54,15 +56,26 @@ public class DialogAccount implements Initializable {
     private Account getValue() {
         String username = this.tfxUsername.getText();
         String password = this.txfPassword.getText();
-//        TODO 1: Check password và confirm
         boolean isValid = true;
+        String confirm = this.tfxConfirm.getText();
 
-        if (true/*password không hợp lệ*/) {
+        if (username == null || "".equals(username)) {
+            this.lblErrorUsername.setVisible(true);
+            isValid = false;
+        } else {
+            Member user = dbUtil.getAccountMember(username, "");
+            if (user.getMemberId() != 0) {
+                this.lblErrorUsername.setVisible(true);
+                isValid = false;
+            }
+        }
+
+        if (password == null || "".equals(password)) {
             this.lblErrorPassword.setVisible(true);
             isValid = false;
         }
 
-        if (true/*confirm không hợp lệ*/) {
+        if (confirm == null || "".equals(confirm) || !confirm.equals(password)) {
             this.lblErrorConfirm.setVisible(true);
             isValid = false;
         }
@@ -94,9 +107,8 @@ public class DialogAccount implements Initializable {
     public void nextDialog(ActionEvent actionEvent) throws IOException {
         Account account = getValue();
 
-//        TODO 2: Check account có null hay không
         if (account == null) {
-            // Password hoặc confirm không hợp lệ
+            btnNext.setDisable(false);
         }
         else {
             int accountId = dbUtil.addAccount(account);

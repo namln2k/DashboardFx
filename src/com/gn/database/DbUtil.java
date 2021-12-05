@@ -86,11 +86,11 @@ public class DbUtil {
             // fill data
             stmt.setInt(1, transaction.getMemberId());
             stmt.setInt(2, transaction.getPartnerId());
-            stmt.setString(3, transaction.getProjectName());
-            stmt.setDate(4, new java.sql.Date(transaction.getStartTime().getTime()));
+            stmt.setString(3, transaction.getProjectName() == null ? "" : transaction.getProjectName());
+            stmt.setDate(4, transaction.getStartTime() == null ? null : new java.sql.Date(transaction.getStartTime().getTime()));
             stmt.setLong(5, transaction.getTotalMoney());
-            stmt.setString(6, transaction.getAction());
-            stmt.setString(7, transaction.getContent());
+            stmt.setString(6, transaction.getAction() == null ? "" : transaction.getAction());
+            stmt.setString(7, transaction.getContent() == null ? "" : transaction.getContent());
             stmt.setInt(8, transaction.getStatus());
 
             stmt.execute();
@@ -107,11 +107,11 @@ public class DbUtil {
             // fill data
             stmt.setInt(1, transaction.getMemberId());
             stmt.setInt(2, transaction.getPartnerId());
-            stmt.setString(3, transaction.getProjectName());
-            stmt.setDate(4, new java.sql.Date(transaction.getStartTime().getTime()));
+            stmt.setString(3, transaction.getProjectName() == null ? "" : transaction.getProjectName());
+            stmt.setDate(4, transaction.getStartTime() == null ? null : new java.sql.Date(transaction.getStartTime().getTime()));
             stmt.setLong(5, transaction.getTotalMoney());
-            stmt.setString(6, transaction.getAction());
-            stmt.setString(7, transaction.getContent());
+            stmt.setString(6, transaction.getAction() == null ? "" : transaction.getAction());
+            stmt.setString(7, transaction.getContent() == null ? "" : transaction.getContent());
             stmt.setInt(8, transaction.getStatus());
             stmt.setInt(9, transaction.getTransactionId());
 
@@ -181,14 +181,57 @@ public class DbUtil {
 
     public List<TableData> searchTransaction(String projectName, String partner, String username, Date startTime, Date endTime) {
         List<TableData> tableData = new ArrayList<>();
+        java.sql.Date start = null;
+        java.sql.Date end = null;
+        if (startTime != null) {
+            start = new java.sql.Date(startTime.getTime());
+        }
+        if (endTime != null) {
+            end = new java.sql.Date(endTime.getTime());
+        }
         try {
-            String sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
-                    + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
-                    + "and a.account_id = m.account_id and t.project_name like ? and p.name like ? and a.username like ?";
-            PreparedStatement stmt = connection.prepareStatement(sqlQuery);
-            stmt.setString(1, "%" + projectName + "%");
-            stmt.setString(2, "%" + partner + "%");
-            stmt.setString(3, "%" + username + "%");
+            String sqlQuery;
+            PreparedStatement stmt;
+            if (start != null && end != null) {
+                sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                        + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
+                        + "and a.account_id = m.account_id and t.project_name like ? and p.name like ? and a.username like ? "
+                        + "and t.start_time > ? and t.start_time < ?";
+                stmt = connection.prepareStatement(sqlQuery);
+                stmt.setString(1, "%" + projectName + "%");
+                stmt.setString(2, "%" + partner + "%");
+                stmt.setString(3, "%" + username + "%");
+                stmt.setDate(4, start);
+                stmt.setDate(5, end);
+            } else if (start == null && end != null) {
+                sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                        + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
+                        + "and a.account_id = m.account_id and t.project_name like ? and p.name like ? and a.username like ? "
+                        + "and t.start_time < ?";
+                stmt = connection.prepareStatement(sqlQuery);
+                stmt.setString(1, "%" + projectName + "%");
+                stmt.setString(2, "%" + partner + "%");
+                stmt.setString(3, "%" + username + "%");
+                stmt.setDate(4, end);
+            } else if (start != null) {
+                sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                        + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
+                        + "and a.account_id = m.account_id and t.project_name like ? and p.name like ? and a.username like ? "
+                        + "and t.start_time > ?";
+                stmt = connection.prepareStatement(sqlQuery);
+                stmt.setString(1, "%" + projectName + "%");
+                stmt.setString(2, "%" + partner + "%");
+                stmt.setString(3, "%" + username + "%");
+                stmt.setDate(4, start);
+            } else {
+                sqlQuery = "SELECT t.transaction_id, a.username, m.fullname, t.project_name, p.name, t.total_money, t.start_time, t.action, t.content, t.status\n"
+                        + "FROM transaction t, member m, partner p, account a\n" + "where t.member_id = m.member_id and t.partner_id = p.partner_id "
+                        + "and a.account_id = m.account_id and t.project_name like ? and p.name like ? and a.username like ? ";
+                stmt = connection.prepareStatement(sqlQuery);
+                stmt.setString(1, "%" + projectName + "%");
+                stmt.setString(2, "%" + partner + "%");
+                stmt.setString(3, "%" + username + "%");
+            }
             ResultSet rs = stmt.executeQuery();
             int index = 0;
             while (rs.next()) {
@@ -258,9 +301,9 @@ public class DbUtil {
         try {
             String sqlQuery = "INSERT INTO `csms`.`partner` (`name`, `phone_number`, `address`) " + "VALUES (?, ?, ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
-            stmt.setString(1, partner.getName());
-            stmt.setString(2, partner.getPhone());
-            stmt.setString(3, partner.getAddress());
+            stmt.setString(1, partner.getName() == null ? "" : partner.getName());
+            stmt.setString(2, partner.getPhone() == null ? "" : partner.getPhone());
+            stmt.setString(3, partner.getAddress() == null ? "" : partner.getAddress());
             stmt.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -271,9 +314,9 @@ public class DbUtil {
         try {
             String sqlQuery = "UPDATE `csms`.`partner` " + "SET `name` = ?, `phone_number` = ?, `address` = ?" + "WHERE (`partner_id` = ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
-            stmt.setString(1, partner.getName());
-            stmt.setString(2, partner.getPhone());
-            stmt.setString(3, partner.getAddress());
+            stmt.setString(1, partner.getName() == null ? "" : partner.getName());
+            stmt.setString(2, partner.getPhone() == null ? "" : partner.getPhone());
+            stmt.setString(3, partner.getAddress() == null ? "" : partner.getAddress());
             stmt.setInt(4, partner.getPartnerId());
 
             stmt.execute();
@@ -310,17 +353,17 @@ public class DbUtil {
         try {
             String sqlQuery = "UPDATE `csms`.`member` " + "SET `fullname` = ?, `gender` = ?, `birthday` = ?, " + "`phone_number` = ?, `address` = ?, `tax_code` = ?, `career` = ?, " + "`email` = ?, `site` = ?, `brief` = ?, `intro` = ? WHERE (`account_id` = ?);";
             PreparedStatement stmt = connection.prepareStatement(sqlQuery);
-            stmt.setString(1, member.getFullName());
-            stmt.setString(2, member.getGender());
-            stmt.setDate(3, new java.sql.Date(member.getBirthday().getTime()));
-            stmt.setString(4, member.getPhone());
-            stmt.setString(5, member.getAddress());
-            stmt.setString(6, member.getTaxCode());
-            stmt.setString(7, member.getCareer());
-            stmt.setString(8, member.getEmail());
-            stmt.setString(9, member.getSite());
-            stmt.setString(10, member.getBrief());
-            stmt.setString(11, member.getIntro());
+            stmt.setString(1, member.getFullName() == null ? "" : member.getFullName());
+            stmt.setString(2, member.getGender() == null ? "" : member.getGender());
+            stmt.setDate(3, member.getBirthday() == null ? null : new java.sql.Date(member.getBirthday().getTime()));
+            stmt.setString(4, member.getPhone() == null ? "" : member.getPhone());
+            stmt.setString(5, member.getAddress() == null ? "" : member.getAddress());
+            stmt.setString(6, member.getTaxCode() == null ? "" : member.getTaxCode());
+            stmt.setString(7, member.getCareer() == null ? "" : member.getCareer());
+            stmt.setString(8, member.getEmail() == null ? "" : member.getEmail());
+            stmt.setString(9, member.getSite() == null ? "" : member.getSite());
+            stmt.setString(10, member.getBrief() == null ? "" : member.getBrief());
+            stmt.setString(11, member.getIntro() == null ? "" : member.getIntro());
             stmt.setInt(12, member.getAccountId());
 
             stmt.execute();

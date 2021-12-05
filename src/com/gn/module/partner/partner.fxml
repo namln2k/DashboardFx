@@ -11,54 +11,45 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="994.0" prefWidth="1681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.gn.module.partner.PartnerController">
+<StackPane prefHeight="994.0" prefWidth="1681.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gn.module.partner.PartnerController">
     <children>
         <VBox prefWidth="1661.0" spacing="20.0">
             <StackPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </StackPane.margin>
             <children>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="1661.0"
-                      style="-fx-background-color: lightblue;">
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="92.0" prefWidth="1661.0" style="-fx-background-color: lightblue;">
                     <children>
-                        <Label prefHeight="51.0" prefWidth="361.0"
-                               style="-fx-text-fill: -text-color; -fx-font-size: 35; -fx-font-weight: bold;"
-                               text="DANH SÁCH ĐỐI TÁC">
+                        <Label prefHeight="51.0" prefWidth="361.0" style="-fx-text-fill: -text-color; -fx-font-size: 35; -fx-font-weight: bold;" text="DANH SÁCH ĐỐI TÁC">
                             <font>
-                                <Font size="8.0"/>
+                                <Font size="8.0" />
                             </font>
                         </Label>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER_RIGHT" prefHeight="92.0" prefWidth="550.0" spacing="50.0"
-                      style="-fx-border-color: tan;">
+                <HBox alignment="CENTER_RIGHT" prefHeight="92.0" prefWidth="550.0" spacing="50.0" style="-fx-border-color: tan;">
                     <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#addPartner" pickOnBounds="false"
-                                prefHeight="65.0" prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-success" text="Thêm đối tác"/>
-                        <Button mnemonicParsing="false" onAction="#deletePartner" pickOnBounds="false" prefHeight="50.0"
-                                prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;"
-                                styleClass="btn-danger" text="Xóa đối tác"/>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#addPartner" pickOnBounds="false" prefHeight="65.0" prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-success" text="Thêm đối tác" />
+                        <Button mnemonicParsing="false" onAction="#deletePartner" pickOnBounds="false" prefHeight="50.0" prefWidth="200.0" style="-fx-font-size: 20; -fx-font-weight: bold;" styleClass="btn-danger" text="Xóa đối tác" />
                     </children>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                     <VBox.margin>
-                        <Insets left="1111.0"/>
+                        <Insets left="1111.0" />
                     </VBox.margin>
                     <padding>
-                        <Insets right="50.0"/>
+                        <Insets right="50.0" />
                     </padding>
                 </HBox>
                 <HBox prefHeight="500.0" prefWidth="1661.0">
                     <children>
                         <TableView fx:id="tableView" editable="true" prefHeight="500.0" prefWidth="1661.0">
                             <columns>
-                                <TableColumn fx:id="colIndex" editable="false" prefWidth="50.0" text="STT"/>
-                                <TableColumn fx:id="colName" prefWidth="500.0" text="Partner name"/>
-                                <TableColumn fx:id="colPhoneNumber" prefWidth="300.0" text="Phone number"/>
-                                <TableColumn fx:id="colAddress" minWidth="0.0" prefWidth="750.0" text="Address"/>
+                                <TableColumn fx:id="colIndex" editable="false" prefWidth="50.0" text="STT" />
+                                <TableColumn fx:id="colName" prefWidth="500.0" text="Tên đối tác" />
+                                <TableColumn fx:id="colPhoneNumber" prefWidth="300.0" text="Số điện thoại" />
+                                <TableColumn fx:id="colAddress" minWidth="0.0" prefWidth="750.0" text="Địa chỉ" />
                             </columns>
                         </TableView>
                     </children>
@@ -67,13 +58,13 @@
         </VBox>
     </children>
     <stylesheets>
-        <URL value="@../../theme/css/material-color.css"/>
-        <URL value="@../../theme/css/skeleton.css"/>
-        <URL value="@../../theme/css/light.css"/>
-        <URL value="@../../theme/css/bootstrap.css"/>
-        <URL value="@../../theme/css/shape.css"/>
-        <URL value="@../../theme/css/typographic.css"/>
-        <URL value="@../../theme/css/helpers.css"/>
-        <URL value="@../../theme/css/master.css"/>
+        <URL value="@../../theme/css/material-color.css" />
+        <URL value="@../../theme/css/skeleton.css" />
+        <URL value="@../../theme/css/light.css" />
+        <URL value="@../../theme/css/bootstrap.css" />
+        <URL value="@../../theme/css/shape.css" />
+        <URL value="@../../theme/css/typographic.css" />
+        <URL value="@../../theme/css/helpers.css" />
+        <URL value="@../../theme/css/master.css" />
     </stylesheets>
 </StackPane>

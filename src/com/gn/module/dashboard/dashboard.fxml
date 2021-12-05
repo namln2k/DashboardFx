@@ -51,14 +51,14 @@
                             <columns>
                                 <TableColumn fx:id="colIndex" editable="false" prefWidth="50.0" resizable="false" text="STT" />
                                 <TableColumn fx:id="colUsername" prefWidth="150.0" text="Username" />
-                                <TableColumn fx:id="colFullName" prefWidth="180.0" text="Full name" />
-                                <TableColumn fx:id="colProject" minWidth="0.0" prefWidth="180.0" text="Project" />
-                                <TableColumn fx:id="colPartner" prefWidth="180.0" text="Partner" />
-                                <TableColumn fx:id="colMoney" prefWidth="130.0" text="Money" />
-                                <TableColumn fx:id="colTime" prefWidth="160.0" text="Time" />
-                                <TableColumn fx:id="colAction" prefWidth="150.0" text="Action" />
-                                <TableColumn fx:id="colContent" prefWidth="300.0" text="Content" />
-                                <TableColumn fx:id="colStatus" prefWidth="150.0" text="Status" />
+                                <TableColumn fx:id="colFullName" prefWidth="180.0" text="Họ và tên" />
+                                <TableColumn fx:id="colProject" minWidth="0.0" prefWidth="180.0" text="Tên dự án" />
+                                <TableColumn fx:id="colPartner" prefWidth="180.0" text="Đối tác" />
+                                <TableColumn fx:id="colMoney" prefWidth="130.0" text="Số tiền" />
+                                <TableColumn fx:id="colTime" prefWidth="160.0" text="Thời gian" />
+                                <TableColumn fx:id="colAction" prefWidth="150.0" text="Hành động" />
+                                <TableColumn fx:id="colContent" prefWidth="300.0" text="Nội dung" />
+                                <TableColumn fx:id="colStatus" prefWidth="150.0" text="Trạng thái" />
                             </columns>
                         </TableView>
                     </children>
@@ -82,13 +82,13 @@
                                       </HBox>
                                       <HBox alignment="CENTER" layoutX="181.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                                           <children>
-                                              <Label styleClass="h4" text="Partner" />
+                                              <Label styleClass="h4" text="Đối tác" />
                                               <ComboBox fx:id="cbxPartner" prefHeight="50.0" prefWidth="150.0" />
                                           </children>
                                       </HBox>
                                       <HBox alignment="CENTER" layoutX="266.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                                           <children>
-                                              <Label styleClass="h4" text="Project" />
+                                              <Label styleClass="h4" text="Dự án" />
                                               <TextField fx:id="txfProject" prefHeight="50.0" prefWidth="150.0" />
                                           </children>
                                       </HBox>
@@ -98,13 +98,13 @@
                            <children>
                               <HBox alignment="CENTER" prefWidth="320.0" spacing="10.0">
                                  <children>
-                                    <Label styleClass="h4" text="Start time" />
+                                    <Label styleClass="h4" text="Thời gian bắt đầu" />
                                     <DatePicker fx:id="dpkStartTime" prefHeight="50.0" prefWidth="150.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefWidth="320.0" spacing="10.0">
                                  <children>
-                                    <Label styleClass="h4" text="End time" />
+                                    <Label styleClass="h4" text="Thời gian kết thúc" />
                                     <DatePicker fx:id="dpkEndTime" prefHeight="50.0" prefWidth="150.0" />
                                  </children>
                               </HBox>
