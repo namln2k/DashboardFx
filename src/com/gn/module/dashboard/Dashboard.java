@@ -42,11 +42,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
- * Create on  20/10/2018
- * Version 1.0
- */
+
 public class Dashboard implements Initializable {
 
     private final DbUtil dbUtil = new DbUtil();
