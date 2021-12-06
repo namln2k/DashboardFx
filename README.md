@@ -95,7 +95,7 @@ For further details, see the document
 <!-- LICENSE -->
 ## License
 
- See `LICENSE.txt` for more information.
+ See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
